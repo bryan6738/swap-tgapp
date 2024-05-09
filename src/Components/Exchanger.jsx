@@ -48,7 +48,7 @@ setSrc2(logo)
 <div className='w-full flex cursor-pointer'>
 
 
-  <div className={`w-1/2 ${    !isActive ? `${roundedTrClass} ${roundedBrClass}` : ''} text-[11px] rounded-tl-3xl   p-3 text-black/60 flex justify-center items-center border-2`}
+  <div className={`w-1/2 ${    !isActive ? `${roundedTrClass} ${roundedBrClass}` : ''} text-[14px] font-semibold rounded-tl-3xl   p-3 text-black/50 flex justify-center items-center `}
    onClick={handleClick}
   
   >
@@ -57,7 +57,7 @@ setSrc2(logo)
 
 
 
-  <div      className={`w-1/2  p-3 rounded-tr-3xl text-[11px]  text-black/60 border-2 flex justify-center items-center  ${
+  <div      className={`w-1/2  p-3 rounded-tr-3xl text-[14px]  text-black/50 font-semibold  flex justify-center items-center  ${
         isActive ? `${roundedTrClass} ${roundedBlClass}` : ''
       }`}
       onClick={handleClick}
@@ -120,9 +120,9 @@ setSrc2(logo)
 </div>
 </div>
 
-<div className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
-    <Link to={'/exchange'} className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</Link>
-</div>
+<Link to={'/tg-mini-app/exchange'} className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
+    <button  className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</button>
+</Link>
 
 </div>
 {/* for inputs */}

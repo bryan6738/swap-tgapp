@@ -27,15 +27,15 @@ const Footer = () => {
 
 <Faqs/>
 
-<div className='py-12 px-2 bg-[#0B172F]'>
-<div><p className='text-xs text-white/50'>© 2018-2024 SimpleSwap</p></div>
-<div className='flex justify-between'>
-    <div className='text-white' ><FaYoutube /></div>
-    <div className='text-white' ><FaSquareXTwitter /></div>
-    <div className='text-white' ><BsDiscord /></div>
-    <div className='text-white' ><FaTelegramPlane /></div>
+<div className='py-3  px-2 bg-[#0B172F]'>
+<div><p className='text-md text-white/50 mb-5 '>© 2018-2024 SimpleSwap</p></div>
+<div className='flex justify-around'>
+    <div className='text-white' ><FaYoutube size={22} /></div>
+    <div className='text-white' ><FaSquareXTwitter size={22} /></div>
+    <div className='text-white' ><BsDiscord size={22} /></div>
+    <div className='text-white' ><FaTelegramPlane size={22} /></div>
    
-    <div className='text-white' ><SiTradingview /></div>
+    <div className='text-white' ><SiTradingview size={22} /></div>
     <div className='text-white' >More</div>
 </div>
 </div>

@@ -4,7 +4,7 @@ import { TiTick } from "react-icons/ti";
 const Buy_Crypto = () => {
   return (
     <>
-      <div  className=' mt-14 pb-5 bg-[#062763]  border rounded-2xl ' >
+      <div  className=' mt-14 pb-5 bg-[#082F77]   rounded-2xl ' >
         <div className='flex justify-center align-middle -mt-7 ' > <img src={fiat} alt="" width={200}  /> </div>
 
 

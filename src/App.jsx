@@ -9,7 +9,7 @@ function App() {
    
     <Routes>
     <Route   path='/tg-mini-app/'  element={<Layout/>} />
-    <Route   path='/tg-mini-app/exchange'  element={<Screen2/>} />
+    <Route    path='/tg-mini-app/exchange'  element={<Screen2/>} />
     <Route   path='/tg-mini-app/screen3'  element={<Screen3/>} />
    
   </Routes>

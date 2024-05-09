@@ -3,7 +3,7 @@ import coin from '../assets/coins.png'
 const Wide_cards = () => {
   return (
     <>
-       <div className='mx-1 mt-5 bg-[#062763]  border rounded-lg ' >
+       <div className='mx-1 mt-5 bg-[#082F77] p-1  rounded-lg ' >
        {/* making ther img and privacy flex */}
        <div className='flex justify-between mx-2 ' >
         <div  className='ml-[2%] mt-[5%] '  > <p className='text-[#337bb6] text-sm font-semibold   ' > Wide choice </p> </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from 'react-router-dom';
 const summaryStyle = {
     outline: 'none',
     cursor: 'pointer',
@@ -10,13 +11,13 @@ const summaryStyle = {
 const Faqs2 = () => {
   return (
     
-    <section class=" bg-white text-black  ">
+    <section class=" bg-white text-black mx-2 rounded-xl mt-4  ">
       <div className='shadow-2xl' >
      <div className='mx-11' >   <p className='font-[600] text-[16px]' >Enter the wallet address</p>
        <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='w-[100%] h-12 p-3 '   />  </div></div>
-        <div className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-10 my-5 flex justify-center'>
+        <Link to={'/tg-mini-app/screen3'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-10 my-5 flex justify-center'>
     <button  className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</button>
-</div>
+</Link>
         <div className='mb-5' > <p className='text-center' > By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p> </div>
         {/* Additional Details */}
         <details  className='mx-8' >
@@ -33,7 +34,9 @@ const Faqs2 = () => {
         </div>
       </details>
       </div>
-        <div className='text-[14px] font-[600] ml-5 my-5 ' >  <p> Have Any Question </p> </div>
+      
+        <div className='text-[16px] font-[600] ml-5 my-5 ' >  <p> Have Any Question </p> </div>
+        <div className=' mx-3 rounded-lg mb-5 '>
   <div class="container flex flex-col justify-center p-4 mx-auto md:p-8">
     <div class="flex flex-col divide-y  divide-gray-700">
       <details className='mx-4' >
@@ -70,6 +73,7 @@ const Faqs2 = () => {
 
     
     </div>
+  </div>
   </div>
 </section>
 
