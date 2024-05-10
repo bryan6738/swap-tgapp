@@ -51,7 +51,7 @@ const Home = () => {
       <div className='bg-regal-blue h-[550px]'>
         <Navbar />
         <div>
-          <div className='flex  text-white flex-col justify-center p-4 items-center'>
+          <div className='flex text-white flex-col justify-center p-4 items-center'>
             <h1 className='text-white leading-relaxed text-[40px]'>Crypto Exchange</h1>
             <p className='text-md font-normal  leading-tight text-center '>Free from sign-up, limits, complications</p>
           </div>

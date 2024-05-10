@@ -94,7 +94,8 @@ const Screen2 = () => {
                   <div>   <a href="#" className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200">
                     Currencies
                   </a></div> <div className='text-white mt-1'>
-                    <MdOutlineKeyboardArrowRight size={20} /></div>
+                    <MdOutlineKeyboardArrowRight size={20} />
+                    </div>
                 </div>
               </li>
               <hr className='opacity-10' />
