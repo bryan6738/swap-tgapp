@@ -15,7 +15,7 @@ const Faqs2 = () => {
       <div className='shadow-2xl' >
         <div className='mx-11' >   <p className='font-[600] text-[16px]' >Enter the wallet address</p>
           <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='w-[100%] h-12 p-3 ' />  </div></div>
-        <Link to={'/tg-mini-app/screen3'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-10 my-5 flex justify-center'>
+        <Link to={'/swap-tgapp/screen3'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-10 my-5 flex justify-center'>
           <button className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</button>
         </Link>
         <div className='mb-5' > <p className='text-center' > By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p> </div>

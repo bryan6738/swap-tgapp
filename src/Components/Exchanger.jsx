@@ -109,7 +109,7 @@ const Exchanger = () => {
             </div>
           </div>
 
-          <Link to={'/tg-mini-app/exchange'} 
+          <Link to={'/swap-tgapp/exchange'} 
             className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
             <button className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</button>
           </Link>

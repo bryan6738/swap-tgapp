@@ -18,7 +18,7 @@ const Currency = () => {
           <p>how easy and profitable it is.</p>
         </div>
         <div className='mx-11 bg-[#0f75fc] text-center rounded-md mt-5'>
-          <Link to={'/tg-mini-app/exchange'} className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
+          <Link to={'/swap-tgapp/exchange'} className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
             <button className='p-1 text-center flex justify-center items-center  text-white text-[14px] font-[500] font-sans'>Create an Exchange</button>
           </Link>
         </div>
