@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from 'react-router-dom';
+
 const summaryStyle = {
   outline: 'none',
   cursor: 'pointer',
@@ -68,10 +69,6 @@ const Faqs2 = () => {
                 <p> Don’t forget to log in to your account every time before creating the exchange as this is the only way to get crypto cashback. Please, read about different types of cashback subscriptions and find the terms and conditions of our Loyalty Program <a href="" className='text-blue-700 underline ' >here.</a> </p>
               </div>
             </details>
-
-
-
-
           </div>
         </div>
       </div>
