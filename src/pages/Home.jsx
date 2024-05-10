@@ -5,7 +5,7 @@ import Faqs from '../Components/Faqs'
 import Footer from '../Components/Footer'
 import Card1 from '../Components/Card1'
 import Card2 from '../Components/Card2'
-import Buy_Crypto from '../Components/Buy_Crypto'
+import FiatCard from '../Components/FiatCard'
 import Trustpilot from '../Components/Trustpilot'
 import Currency from '../Components/Currency'
 import How_it_works from '../Components/How_it_works'
@@ -45,9 +45,6 @@ const cards = [
   },
 ]
 
-
-
-
 const Home = () => {
   return (
     <>
@@ -69,7 +66,7 @@ const Home = () => {
               cards.map((props, index) => (
                 <Card2 key={index} {...props} />))
             }
-            <Buy_Crypto />
+            <FiatCard />
             <Trustpilot />
           </div>
           <Currency />
