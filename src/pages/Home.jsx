@@ -14,36 +14,36 @@ import Currency from '../Components/Currency'
 import How_it_works from '../Components/How_it_works'
 const Home = () => {
   return (
-<>
-<div className='bg-regal-blue h-[550px]'>
-<Navbar/>
-{/* Exhanger Home Component starts here */}
-<div>
-{/* Heading starts here */}
-<div className='flex  text-white flex-col justify-center p-4 items-center'>
-    <h1 className='text-white leading-relaxed text-[40px]'>Crypto Exchange</h1>
-    <p className='text-md font-normal  leading-tight text-center '>Free from sign-up, limits, complications</p>
-</div>
-<Exchanger/>
-</div>
-</div>
-<div>
-  <div className='bg-[#062769]'>
-<div className='mx-3' >
-<Cards/>
-<Privacy_card/>
-<Wide_cards/>
-<Safety/>
-<Support/>
-<Buy_Crypto/>
-<Trustpilot/>
-</div>
-<Currency/>
-<How_it_works />
-</div>
-<Footer/>
-</div>
-</>
+    <>
+      <div className='bg-regal-blue h-[550px]'>
+        <Navbar />
+        {/* Exhanger Home Component starts here */}
+        <div>
+          {/* Heading starts here */}
+          <div className='flex  text-white flex-col justify-center p-4 items-center'>
+            <h1 className='text-white leading-relaxed text-[40px]'>Crypto Exchange</h1>
+            <p className='text-md font-normal  leading-tight text-center '>Free from sign-up, limits, complications</p>
+          </div>
+          <Exchanger />
+        </div>
+      </div>
+      <div>
+        <div className='bg-[#062769]'>
+          <div className='mx-3' >
+            <Cards />
+            <Privacy_card />
+            <Wide_cards />
+            <Safety />
+            <Support />
+            <Buy_Crypto />
+            <Trustpilot />
+          </div>
+          <Currency />
+          <How_it_works />
+        </div>
+        <Footer />
+      </div>
+    </>
   )
 }
 export default Home

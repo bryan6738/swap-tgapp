@@ -21,16 +21,15 @@ const Sidebar = () => {
       </button>
 
       <div
-       className={`fixed z-50 right-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out transform translate-x-full sm:translate-x-0 ${
-        isOpen ? 'opacity-100 translate-x-0' : 'opacity-0'
-     }`}
-     
+        className={`fixed z-50 right-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out transform translate-x-full sm:translate-x-0 ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0'
+          }`}
+
       >
-      <div className="flex items-center justify-end px-4 py-6 text-white">
-  <button type="button" onClick={toggleSidebar} className="focus:outline-none">
-    <AiOutlineCloseCircle size={32} />
-  </button>
-</div>
+        <div className="flex items-center justify-end px-4 py-6 text-white">
+          <button type="button" onClick={toggleSidebar} className="focus:outline-none">
+            <AiOutlineCloseCircle size={32} />
+          </button>
+        </div>
 
         {/* Add your sidebar content here */}
         <ul className="space-y-2 px-4">
