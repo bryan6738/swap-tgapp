@@ -13,23 +13,22 @@ const Faqs2 = () => {
 
     <section className="bg-white text-black mx-2 rounded-xl mt-4  ">
       <div className='shadow-2xl' >
-        <div className='mx-11' >   <p className='font-[600] text-[16px]' >Enter the wallet address</p>
-          <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='w-[100%] h-12 p-3 ' />  </div></div>
+        <div className='mx-11' ><p className='pt-4 font-[600] text-[16px] text-black/60'>Enter the wallet address</p>
+          <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='border border-2 w-[100%] h-12 p-3 rounded-md' />  </div></div>
         <Link to={'/swap-tgapp/screen3'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-10 my-5 flex justify-center'>
           <button className='p-1 text-center flex justify-center items-center  text-white text-[12px] font-[500] font-sans '>Exchange</button>
         </Link>
         <div className='mb-5' > <p className='text-center' > By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p> </div>
-        {/* Additional Details */}
         <details className='mx-8' >
           <summary style={summaryStyle} className="py-2 outline-none flex cursor-pointer"><h1 className='ml-[25%] text-black font-[400] text-[16px]'>Additional Details </h1><span className=''><IoIosArrowDown size={25} /></span></summary>
           <div className="pb-4">
             <p className='font-[600] text-[16px]' >Enter the refund address</p>
             <p className='leading-tight text-[14px] text-gray-600 ' >We recommend adding your wallet address for a refund. </p>
-            <div className='mt-1' > <input type="text" placeholder='THE BTC REFUND ADDRESS' className='w-[100%] h-12 p-3 ' />  </div>
+            <div className='mt-1' > <input type="text" placeholder='THE BTC REFUND ADDRESS' className='border border-2 w-[100%] h-12 p-3 rounded-md' />  </div>
 
             <p className='font-[600] text-[16px] mt-8 ' >Add Email</p>
             <p className='leading-tight text-[14px] text-gray-600 ' >If you want to get notifications about this exchange. </p>
-            <div className='mt-1' > <input type="text" placeholder='THE EMAIL ADDRESS' className='w-[100%] h-12 p-3 ' />  </div>
+            <div className='mt-1' > <input type="text" placeholder='THE EMAIL ADDRESS' className='border border-2 w-[100%] h-12 p-3 rounded-md' />  </div>
 
           </div>
         </details>
