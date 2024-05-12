@@ -12,8 +12,8 @@ const MainForm = () => {
   const [showDropdown2, setShowDropdown2] = useState(false);
   const [fromCoin, setFromCoin] = useState({ image: logo, symbol: 'BTC' });
   const [toCoin, setToCoin] = useState({ image: etc, symbol: 'ETH' });
-  const [fromCoinAmount, setFromCoinAmount] = useState(0.1);
-  const [toCoinAmount, setToCoinAmount] = useState(0.22222);
+  const [fromCoinAmount, setFromCoinAmount] = useState(0);
+  const [toCoinAmount, setToCoinAmount] = useState(0);
   const [coinList, setCoinList] = useState([]);
   const [tempCoinList, setTempCoinList] = useState([]);
 
@@ -25,8 +25,10 @@ const MainForm = () => {
         const response = await axios.get(`https://api.simpleswap.io/get_all_currencies?api_key=${api_key}`);
         setCoinList(response.data);
         setTempCoinList(response.data)
-        setFromCoin(response.data[0]);
-        setToCoin(response.data[1]);
+        let btc = response.data.find((item) => item.symbol == 'btc');
+        let eth = response.data.find((item) => item.symbol == 'eth');
+        setFromCoin(btc);
+        setToCoin(eth);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -34,7 +36,6 @@ const MainForm = () => {
     fetchData();
   }, []);
 
-  setFromCoinAmount(e.target.value);
   const getEstimateAmount = async () => {
     try {
       const response = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${parseFloat(fromCoinAmount)}`);
