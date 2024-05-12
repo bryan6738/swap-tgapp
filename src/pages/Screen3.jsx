@@ -1,17 +1,9 @@
 import Footer from "../Components/Footer";
-// import logo from '../assets/home/Exchanger/btc.svg'
-// import etc from '../assets/home/Exchanger/eth.svg'
-// import load from '../assets/home/Exchanger/loadarrow.svg'
-// import {Link} from 'react-router-dom'
-// import usd from '../assets/home/Exchanger/usd.svg'
-// import { IoIosArrowDown } from "react-icons/io";
-// import { FaUnlockAlt } from "react-icons/fa";
 import Faqs3 from "../Components/Faqs3";
 import Cards2 from "../Components/Cards2";
 import Deposit from "../Components/Deposit";
 import Exchange_id from "../Components/Exchange_id";
 import { FaEthereum } from "react-icons/fa";
-/* import { MdOutlineKeyboardArrowRight } from "react-icons/md"; */
 import { CiShare1 } from "react-icons/ci";
 import Navbar from "../Components/Navbar";
 const Screen3 = () => {
