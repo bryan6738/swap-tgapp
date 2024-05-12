@@ -16,8 +16,6 @@ const MainForm = () => {
   const [toCoinAmount, setToCoinAmount] = useState(0.22222);
   const [coinList, setCoinList] = useState([]);
   const [tempCoinList, setTempCoinList] = useState([]);
-  const fromCoinInput = useRef(null)
-  const toCoinInput = useRef(null)
 
   const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
 
@@ -36,8 +34,19 @@ const MainForm = () => {
     fetchData();
   }, []);
 
+  setFromCoinAmount(e.target.value);
+  const getEstimateAmount = async () => {
+    try {
+      const response = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${parseFloat(fromCoinAmount)}`);
+      setToCoinAmount(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const handleChange = (e) => {
     setFromCoinAmount(e.target.value);
+    getEstimateAmount();
   };
 
   const handleSearch = (e) => {
@@ -99,6 +108,7 @@ const MainForm = () => {
                   onClick={() => {
                     setFromCoin(coin);
                     setShowDropdown1(!showDropdown1);
+                    getEstimateAmount();
                     setTempCoinList(coinList);
                   }}
                   className="flex block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
@@ -173,6 +183,7 @@ const MainForm = () => {
                   onClick={() => {
                     setToCoin(coin);
                     setShowDropdown2(!showDropdown2);
+                    getEstimateAmount();
                     setTempCoinList(coinList);
                   }}
                   className="flex block px-4 py-2 text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer rounded-md">
