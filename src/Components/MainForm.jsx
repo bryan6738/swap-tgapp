@@ -50,6 +50,13 @@ const MainForm = () => {
     getEstimateAmount();
   };
 
+  const handleReversal = () => {
+    let tempCoin = fromCoin;
+    setFromCoin(toCoin);
+    setToCoin(tempCoin);
+    getEstimateAmount();
+  }
+
   const handleSearch = (e) => {
     let tempCoins = coinList.filter((coin) =>
       coin.name.toLowerCase().includes(e.target.value.toLowerCase()) || coin.symbol.toLowerCase().includes(e.target.value.toLowerCase()));
@@ -131,7 +138,7 @@ const MainForm = () => {
           <div className='cursor-pointer flex justify-between gap-x-2 items-center p-4'>
             <h1 className='text-[12px] font-semibold text-black/60'>Floating Rate</h1>
           </div>
-          <div className='hover:bg-blue-600 w-[30px] my-auto h-[30px] bg-gray-200 rounded-full flex justify-center items-center ml-auto'>
+          <div onClick={handleReversal} className='hover:bg-blue-600 w-[30px] my-auto h-[30px] bg-gray-200 rounded-full flex justify-center items-center ml-auto'>
             <img className='w-[25px] h-[25px]' src={load} alt="" />
           </div>
         </div>
