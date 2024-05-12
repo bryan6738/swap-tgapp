@@ -36,9 +36,11 @@ const MainForm = () => {
     fetchData();
   }, []);
 
-  const getEstimateAmount = async () => {
+
+  const getEstimateAmount = async (fromAmount) => {
     try {
-      const response = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${parseFloat(fromCoinAmount)}`);
+      const response = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${
+        parseFloat(fromAmount)}`);
       setToCoinAmount(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -47,14 +49,14 @@ const MainForm = () => {
 
   const handleChange = (e) => {
     setFromCoinAmount(e.target.value);
-    getEstimateAmount();
+    getEstimateAmount(e.target.value);
   };
 
   const handleReversal = () => {
     let tempCoin = fromCoin;
     setFromCoin(toCoin);
     setToCoin(tempCoin);
-    getEstimateAmount();
+    getEstimateAmount(fromCoinAmount);
   }
 
   const handleSearch = (e) => {
