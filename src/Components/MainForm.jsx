@@ -6,14 +6,15 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaUnlockAlt } from "react-icons/fa";
 import axios from 'axios';
 
-const MainForm = () => {
+const MainForm = (props) => {
+  const { exchangeInfo, setExchangeInfo } = props;
   const [isFocused, setIsForcused] = useState(false);
   const [showDropdown1, setShowDropdown1] = useState(false);
   const [showDropdown2, setShowDropdown2] = useState(false);
-  const [fromCoin, setFromCoin] = useState({ image: logo, symbol: 'BTC' });
-  const [toCoin, setToCoin] = useState({ image: etc, symbol: 'ETH' });
-  const [fromCoinAmount, setFromCoinAmount] = useState(0);
-  const [toCoinAmount, setToCoinAmount] = useState(0);
+  const [fromCoin, setFromCoin] = useState(exchangeInfo.fromCoin);
+  const [toCoin, setToCoin] = useState(exchangeInfo.toCoin);
+  const [fromCoinAmount, setFromCoinAmount] = useState(exchangeInfo.fromCoinAmount);
+  const [toCoinAmount, setToCoinAmount] = useState(exchangeInfo.toCoinAmount);
   const [coinList, setCoinList] = useState([]);
   const [tempCoinList, setTempCoinList] = useState([]);
 
@@ -24,17 +25,23 @@ const MainForm = () => {
       try {
         const response = await axios.get(`https://api.simpleswap.io/get_all_currencies?api_key=${api_key}`);
         setCoinList(response.data);
-        setTempCoinList(response.data)
-        let btc = response.data.find((item) => item.symbol == 'btc');
-        let eth = response.data.find((item) => item.symbol == 'eth');
-        setFromCoin(btc);
-        setToCoin(eth);
+        setTempCoinList(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    let info = {
+      fromCoin: fromCoin,
+      toCoin: toCoin,
+      fromCoinAmount: fromCoinAmount,
+      toCoinAmount: toCoinAmount
+    }
+    setExchangeInfo(info);
+  }, [fromCoin, toCoin, fromCoinAmount, toCoinAmount]);
 
 
   const getEstimateAmount = async (fromAmount) => {

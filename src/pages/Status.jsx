@@ -6,7 +6,7 @@ import Exchange_id from "../Components/Exchange_id";
 import { FaEthereum } from "react-icons/fa";
 import { CiShare1 } from "react-icons/ci";
 import Navbar from "../Components/Navbar";
-const Screen3 = () => {
+const Status = () => {
   return (
     <>
       <Navbar />
@@ -56,4 +56,4 @@ const Screen3 = () => {
     </>
   );
 };
-export default Screen3;
+export default Status;
