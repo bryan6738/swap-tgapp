@@ -13,9 +13,8 @@ const Navbar = () => {
     <>
       {/* <BlurOverlay isOpen={isOpen} /> */}
       <div
-        className={`fixed z-50 left-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out transform translate-x-full md:translate-x-0 ${
-          isOpen ? "opacity-100 -translate-x-0" : "invisible"
-        }`}
+        className={`fixed z-50 left-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out transform translate-x-full md:translate-x-0 ${isOpen ? "opacity-100 -translate-x-0" : "invisible"
+          }`}
       >
         <div className="flex items-center justify-end px-4 py-6 text-white">
           <button
@@ -26,7 +25,6 @@ const Navbar = () => {
             <AiOutlineCloseCircle size={32} />
           </button>
         </div>
-        {/* Add your sidebar content here */}
         <ul className="space-y-7 px-4">
           <li>
             <Link
@@ -48,21 +46,7 @@ const Navbar = () => {
               </div>{" "}
             </div>
           </li>
-          <li>
-            <div className="flex justify-between ">
-              <div>
-                <Link
-                  to={"/swap-tgapp/status"}
-                  className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
-                >
-                  Deposit
-                </Link>
-              </div>{" "}
-            </div>
-          </li>
-          {/* Add more sidebar links here */}
         </ul>
-        {/* buton */}
       </div>
       <div className="px-4 py-6 border-b-[0.1px] border-white/60">
         <div className="flex w-full justify-between items-center h-full">

@@ -30,7 +30,7 @@ function App() {
         path='/swap-tgapp/exchange'
         element={<Exchange props={{ exchangeInfo, setExchangeInfo }} />}
       />
-      <Route path='/swap-tgapp/status' element={<Status />} />
+      <Route path='/swap-tgapp/status/:id' element={<Status />} />
     </Routes>
   );
 }

@@ -4,7 +4,7 @@ import Options from "../Components/Options";
 import Navbar from "../Components/Navbar";
 import MainForm from "../Components/MainForm";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
@@ -16,6 +16,17 @@ const summaryStyle = {
 
 const Exchange = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
+  const [refundAddress, setRefundAddress] = useState('');
+  const [toAddress, setToAddress] = useState('');
+  const navigateTo = useNavigate();
+
+  const handleRefundAddress = (e) => {
+    setRefundAddress(e.target.value);
+  };
+
+  const handleToAddress = (e) => {
+    setToAddress(e.target.value);
+  };
 
   const handleSwap = async () => {
     try {
@@ -25,13 +36,16 @@ const Exchange = ({ props }) => {
         currency_from: 'btc',
         currency_to: 'eth',
         amount: exchangeInfo.fromCoinAmount,
-        address_to: 'bc1qwkqqpdeg00wkpzj5344flwtzd6fp3svxz4g3w3',
-        extra_id_to: '',
-        user_refund_address: '',
-        user_refund_extra_id: 'string'
+        address_to: toAddress,
+        extra_id_to: ''
       };
+      if (refundAddress) {
+        bodyContent.user_refund_address = refundAddress;
+      }
       const res = await axios.post(url, bodyContent);
-      setResponse(res.data);
+      if (res.status == 200) {
+        navigateTo(`/swap-tgapp/status/${res.data.id}`);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -56,19 +70,40 @@ const Exchange = ({ props }) => {
             </div>
             <div className='shadow-2xl' >
               <div className='mx-4' >
-                <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='block w-full p-2 ps-10 text-[18px] text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />  </div></div>
-              <Link to={'/swap-tgapp/status'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
+                <div className='mt-1' >
+                  <input
+                    type="text"
+                    value={toAddress}
+                    onChange={handleToAddress}
+                    placeholder={`The recepients ${exchangeInfo.toCoin.name} address`}
+                    className='w-full p-2 ps-3 text-[18px] text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:ring-blue-500 
+                      focus:border-blue-500' />
+                </div>
+              </div>
+              <div className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
                 <button
                   onClick={handleSwap}
                   className='p-1 text-center flex justify-center items-center  text-white text-[18px] font-[500] bold font-sans'>Exchange</button>
-              </Link>
-              <div className='mb-5' > <p className='text-center' > By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p> </div>
+              </div>
+              <div className='mb-5' >
+                <p className='text-center'>By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p>
+              </div>
               <details className='mx-8' >
-                <summary style={summaryStyle} className="py-2 outline-none flex cursor-pointer"><h1 className='ml-[25%] text-black font-[400] text-[16px]'>Additional Details </h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+                <summary style={summaryStyle} className="py-2 outline-none flex cursor-pointer">
+                  <h1 className='ml-[25%] text-black font-[400] text-[16px]'>Additional Details </h1>
+                  <span className=''><IoIosArrowDown size={25} /></span>
+                </summary>
                 <div className="pb-4">
                   <p className='font-[600] text-[16px]' >Enter the refund address</p>
                   <p className='leading-tight text-[14px] text-gray-600 ' >We recommend adding your wallet address for a refund. </p>
-                  <div className='mt-1' > <input type="text" placeholder='THE BTC REFUND ADDRESS' className='focus:outline-none text-black/60  w-full text-[18px] font-bold' />  </div>
+                  <div className='mt-1' >
+                    <input
+                      type="text"
+                      value={refundAddress}
+                      onChange={handleRefundAddress}
+                      placeholder='THE BTC REFUND ADDRESS'
+                      className='focus:outline-none text-black/60  w-full text-[18px] font-bold' />
+                  </div>
                 </div>
               </details>
             </div>
@@ -78,13 +113,19 @@ const Exchange = ({ props }) => {
               <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
                 <div className="flex flex-col divide-y  divide-gray-700">
                   <details className='mx-4' >
-                    <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-black font-[400] text-[15px] '>What is the recipient's address and where do I get it?</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+                    <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer">
+                      <h1 className='w-[90%] text-black font-[400] text-[15px] '>What is the recipient's address and where do I get it?</h1>
+                      <span className=''><IoIosArrowDown size={25} /></span>
+                    </summary>
                     <div className=" pb-4 pt-11 ">
                       You can find the cryptocurrency address in the crypto wallet that you use to keep your coins and tokens. It contains letters and numbers and looks like an alphanumeric string. Cryptocurrencies are based on different blockchains and have their own unique address formats. It’s necessary to provide us with the crypto wallet address, and we’ll send your coins there.
                     </div>
                   </details>
                   <details className='mx-4' >
-                    <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-black font-[400] text-[15px] '>Why is my recipient address shown as invalid?</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+                    <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  ">
+                      <h1 className='w-[90%] text-black font-[400] text-[15px] '>Why is my recipient address shown as invalid?</h1>
+                      <span className=''><IoIosArrowDown size={25} /></span>
+                    </summary>
                     <div className="pb-4">
                       <p className='mb-3' >There may be various reasons, including:  </p>
                       <ul className='text-sm ml-[15%] cursor-pointer'>
