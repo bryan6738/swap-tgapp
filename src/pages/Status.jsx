@@ -51,7 +51,6 @@ const Status = () => {
         </div>
         <Faqs3 />
       </div>
-      {/* footer */}
       <Footer />
     </>
   );

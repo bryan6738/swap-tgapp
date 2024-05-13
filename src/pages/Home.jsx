@@ -49,7 +49,7 @@ const roundedTrClass = ' bg-[#E0E9F1] hover:bg-blue-100';
 const roundedBlClass = 'rounded-bl-[45px]';
 const roundedBrClass = 'rounded-br-[45px]';
 
-const Home = ({props}) => {
+const Home = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
   const [isActive, setIsActive] = useState(true);
 
@@ -83,7 +83,7 @@ const Home = ({props}) => {
               </div>
 
               <div className='p-4 flex flex-col'>
-                <MainForm {...{ exchangeInfo, setExchangeInfo }}/>
+                <MainForm {...{ exchangeInfo, setExchangeInfo }} />
                 <Link to={'/swap-tgapp/exchange'}
                   className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
                   <button className='p-1 text-center flex justify-center items-center  text-white text-[18px] font-[500] font-sans'>Exchange</button>

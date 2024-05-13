@@ -52,7 +52,7 @@ const Navbar = () => {
             <div className="flex justify-between ">
               <div>
                 <Link
-                  to={"/swap-tgapp/screen3"}
+                  to={"/swap-tgapp/status"}
                   className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
                 >
                   Deposit

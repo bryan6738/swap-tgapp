@@ -14,7 +14,7 @@ const summaryStyle = {
   margin: 0,
 };
 
-const Exchange = ({props}) => {
+const Exchange = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
 
   const handleSwap = async () => {
@@ -24,10 +24,10 @@ const Exchange = ({props}) => {
         fixed: false,
         currency_from: 'btc',
         currency_to: 'eth',
-        amount: 10,
-        address_to: '0xAe98b41207abb70184fb86DF1116e8158aD3b688',
+        amount: exchangeInfo.fromCoinAmount,
+        address_to: 'bc1qwkqqpdeg00wkpzj5344flwtzd6fp3svxz4g3w3',
         extra_id_to: '',
-        user_refund_address: 'bc1qkza209rv6kylv4rxd9fc4ypzr5y5yu34he7yy4',
+        user_refund_address: '',
         user_refund_extra_id: 'string'
       };
       const res = await axios.post(url, bodyContent);
@@ -52,12 +52,12 @@ const Exchange = ({props}) => {
               </h1>
             </div>
             <div className="p-4 flex flex-col ">
-              <MainForm {...{ exchangeInfo, setExchangeInfo }}/>
+              <MainForm {...{ exchangeInfo, setExchangeInfo }} />
             </div>
             <div className='shadow-2xl' >
               <div className='mx-4' >
                 <div className='mt-1' > <input type="text" placeholder='THE recepients Ethereum address' className='block w-full p-2 ps-10 text-[18px] text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' />  </div></div>
-              <Link to={'/swap-tgapp/screen3'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
+              <Link to={'/swap-tgapp/status'} className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
                 <button
                   onClick={handleSwap}
                   className='p-1 text-center flex justify-center items-center  text-white text-[18px] font-[500] bold font-sans'>Exchange</button>
@@ -106,7 +106,7 @@ const Exchange = ({props}) => {
                 </div>
               </div>
             </div>
-          {/* </section> */}
+            {/* </section> */}
           </div>
         </div>
         <Footer />
