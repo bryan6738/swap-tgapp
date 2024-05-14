@@ -7,10 +7,12 @@ import { useState } from 'react';
 const initInfo = {
   fromCoin: {
     symbol: 'btc',
+    name: 'Bitcoin',
     image: 'https://static.simpleswap.io/images/currencies-logo/btc.svg',
   },
   toCoin: {
     symbol: 'eth',
+    name: 'Ethereum',
     image: 'https://static.simpleswap.io/images/currencies-logo/eth.svg',
   },
   fromCoinAmount: 0,

@@ -33,8 +33,8 @@ const Exchange = ({ props }) => {
       const url = `https://api.simpleswap.io/create_exchange?api_key=${api_key}`;
       const bodyContent = {
         fixed: false,
-        currency_from: 'btc',
-        currency_to: 'eth',
+        currency_from: exchangeInfo.fromCoin.symbol,
+        currency_to: exchangeInfo.toCoin.symbol,
         amount: exchangeInfo.fromCoinAmount,
         address_to: toAddress,
         extra_id_to: ''
@@ -101,8 +101,9 @@ const Exchange = ({ props }) => {
                       type="text"
                       value={refundAddress}
                       onChange={handleRefundAddress}
-                      placeholder='THE BTC REFUND ADDRESS'
-                      className='focus:outline-none text-black/60  w-full text-[18px] font-bold' />
+                      placeholder={`The ${exchangeInfo.fromCoin.name} Refund address`}
+                      className='w-full p-2 ps-3 text-[18px] text-gray-900 border border-gray-300 rounded-lg bg-gray-100 focus:ring-blue-500 
+                      focus:border-blue-500' />
                   </div>
                 </div>
               </details>

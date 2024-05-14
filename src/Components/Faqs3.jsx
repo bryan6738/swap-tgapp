@@ -12,8 +12,8 @@ const Faqs3 = () => {
 
     <section class=" bg-white text-black  ">
 
-      <div className='text-[14px] font-[600] ml-5 my-5 ' >  <p> Have Any Question </p> </div>
-      <div class="container flex flex-col justify-center p-4 mx-auto md:p-8">
+      <div className='text-[14px] font-[600] ml-5 my-5 pt-5' >  <p> Have Any Question </p> </div>
+      <div class="container flex flex-col justify-center px-4 mx-auto md:p-8">
         <div class="flex flex-col divide-y  divide-gray-700">
           <details className='mx-4' >
             <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-black font-[400] text-[15px] '>I sent  a deposit, whats next?</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
