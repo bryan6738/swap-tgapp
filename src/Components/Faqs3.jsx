@@ -30,8 +30,6 @@ const Faqs3 = () => {
                 <li><span className='font-bold text-black/80 ' >The spelling of the address.</span> Make sure that the address contains all the necessary auxiliary characters, suffixes, and prefixes (dots, dashes).</li>
                 <li><span className='font-bold text-black/80 ' >Extra spaces.</span> Make sure all address characters have been copied. Сheck there are no spaces at the beginning and end of the address.</li>
                 <li><span className='font-bold text-black/80 ' >Incorrect blockchain.</span> Make sure that the network of the selected coin matches the network your address belongs to.</li>
-
-
                 <li><span className='font-bold text-black/80 ' >Some other issues.</span> Feel free to contact our support team which is available 24/7 via email <a href="" className='text-blue-700' > (support@simpleswap.io) </a> or live chat.</li>
               </ul>
             </div>
