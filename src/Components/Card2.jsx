@@ -2,7 +2,7 @@ const Card2 = (props) => {
   const {id, title, img, text1, text2} = props
   return (
     <>
-      <div className='mx-1 mt-14 bg-[#082F77]  p-1 rounded-lg'>
+      <div className='mx-1 mt-4 bg-[#082F77]  p-1 rounded-lg'>
         <div className='flex justify-between mx-2'>
           <div className='ml-[2%] mt-[5%]'> <p className='text-[#337bb6] text-sm font-bold'>{title}</p></div>
           <div className='pt-2'><img src={img} alt="" width={120} className='-mb-9' /></div>

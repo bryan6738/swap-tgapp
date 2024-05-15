@@ -9,12 +9,12 @@ const summaryStyle = {
 
 const Faqs = () => {
   return (
-    <section class="bg-[#010E27] text-gray-100  ">
-      <div class="container flex flex-col justify-center p-4 mx-auto md:p-8">
-        <div class="flex flex-col divide-y  divide-gray-700">
+    <section className="bg-[#010E27] text-gray-100  ">
+      <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
+        <div className="flex flex-col divide-y  divide-gray-700">
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Company & Team</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Company & Team</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>About</li>
                 <li>FAQ</li>
@@ -27,8 +27,8 @@ const Faqs = () => {
             </div>
           </details>
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Exchange Pairs</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Exchange Pairs</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>ETH to BTC</li>
                 <li>BTC to ETH</li>
@@ -45,8 +45,8 @@ const Faqs = () => {
             </div>
           </details>
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Supported Coins</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Supported Coins</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>Bitcoin</li>
                 <li>Ethereum</li>
@@ -65,8 +65,8 @@ const Faqs = () => {
             </div>
           </details>
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Partnership</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Partnership</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>Affiliate Program</li>
                 <li>Development API</li>
@@ -79,8 +79,8 @@ const Faqs = () => {
             </div>
           </details>
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Legal Documents</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>Legal Documents</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>Terms of Service</li>
                 <li>Privacy Policy</li>
@@ -94,8 +94,8 @@ const Faqs = () => {
             </div>
           </details>
           <details>
-            <summary style={summaryStyle} class="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>SimpleSwap Loyalty</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
-            <div class=" pb-4">
+            <summary style={summaryStyle} className="py-2 outline-none  flex justify-between cursor-pointer  "><h1 className='w-[90%] text-white/60'>SimpleSwap Loyalty</h1><span className=''><IoIosArrowDown size={25} /></span></summary>
+            <div className=" pb-4">
               <ul className='text-sm  cursor-pointer'>
                 <li>SimpleSwap Loyalty</li>
                 <li>Loyalty Program</li>

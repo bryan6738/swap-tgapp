@@ -70,13 +70,13 @@ const Home = ({ props }) => {
             <div className='bg-white rounded-3xl drop-shadow-xl '>
               <div className='w-full flex cursor-pointer'>
                 <div className={`w-1/2 ${!isActive ? `${roundedTrClass} ${roundedBrClass}` : ''} 
-            text-[14px] font-semibold rounded-tl-3xl p-3 text-black/50 flex justify-center items-center`}
+                    text-[14px] font-semibold rounded-tl-3xl p-3 text-black/50 flex justify-center items-center`}
                   onClick={handleClick}
                 >
                   <h1>Crypto Exchange</h1>
                 </div>
                 <div className={`w-1/2  p-3 rounded-tr-3xl text-[14px]  text-black/50 font-semibold  flex justify-center items-center  
-            ${isActive ? `${roundedTrClass} ${roundedBlClass}` : ''}`}
+                  ${isActive ? `${roundedTrClass} ${roundedBlClass}` : ''}`}
                   onClick={handleClick}>
                   <span className="cursor-pointer">Buy/Sell Crypto</span>
                 </div>
@@ -101,7 +101,7 @@ const Home = ({ props }) => {
               cards.map((props, index) => (
                 <Card2 key={index} {...props} />))
             }
-            <FiatCard />
+            {/* <FiatCard /> */}
             <Trustpilot />
           </div>
           <Currency />

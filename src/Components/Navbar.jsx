@@ -13,8 +13,8 @@ const Navbar = () => {
     <>
       {/* <BlurOverlay isOpen={isOpen} /> */}
       <div
-        className={`fixed z-50 left-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out transform translate-x-full md:translate-x-0 ${isOpen ? "opacity-100 -translate-x-0" : "invisible"
-          }`}
+        className={`fixed z-50 left-0 top-0 w-1/2 h-full overflow-y-auto bg-gray-800 bg-opacity-75 transition duration-200 ease-in-out 
+          transform translate-x-full md:translate-x-0 ${isOpen ? "opacity-100 -translate-x-0" : "invisible"}`}
       >
         <div className="flex items-center justify-end px-4 py-6 text-white">
           <button
@@ -25,8 +25,8 @@ const Navbar = () => {
             <AiOutlineCloseCircle size={32} />
           </button>
         </div>
-        <ul className="space-y-7 px-4">
-          <li>
+        <ul>
+          <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <Link
               to={"/swap-tgapp/"}
               className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
@@ -34,7 +34,7 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          <li>
+          <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <div className="flex justify-between">
               <div>
                 <Link
