@@ -1,0 +1,13 @@
+.custom-spinner {
+    width: 64px; /* Adjust size as needed */
+    height: 64px; /* Adjust size as needed */
+    border: 4px solid #ffffff; /* Adjust thickness and color */
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

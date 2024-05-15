@@ -8,6 +8,7 @@ import Navbar from "../Components/Navbar";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import './LoadingSpinner.css';
 
 const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
 
@@ -15,6 +16,7 @@ const Status = () => {
   const [status, setStatus] = useState();
   let { id } = useParams();
   const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(status.address_from)
@@ -32,10 +34,12 @@ const Status = () => {
       try {
         const response = await axios.get(`https://api.simpleswap.io/get_exchange?api_key=${api_key}&id=${id}`);
         setStatus(response.data);
+        setIsLoading(false);
         if (response.data.status !== 'finished' && response.data.status !== 'confirmed') {
           setTimeout(fetchData, 5000);
         }
       } catch (error) {
+        setIsLoading(false);
         console.error('Error fetching data:', error);
       }
     };
@@ -95,7 +99,10 @@ const Status = () => {
         <Faqs3 />
       </div>
       <Footer />
+      <div className={`fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-gray-800 bg-opacity-75 ${isLoading ? '' : 'hidden'}`}>
+        <div className="custom-spinner"></div>
+      </div>
     </>
   );
-};
+}
 export default Status;

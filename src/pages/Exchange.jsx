@@ -6,6 +6,7 @@ import MainForm from "../Components/MainForm";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './LoadingSpinner.css';
 
 const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
 const summaryStyle = {
@@ -18,6 +19,9 @@ const Exchange = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
   const [refundAddress, setRefundAddress] = useState('');
   const [toAddress, setToAddress] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
   const navigateTo = useNavigate();
 
   const handleRefundAddress = (e) => {
@@ -30,6 +34,7 @@ const Exchange = ({ props }) => {
 
   const handleSwap = async () => {
     try {
+      setIsLoading(true);
       const url = `https://api.simpleswap.io/create_exchange?api_key=${api_key}`;
       const bodyContent = {
         fixed: false,
@@ -43,18 +48,29 @@ const Exchange = ({ props }) => {
         bodyContent.user_refund_address = refundAddress;
       }
       const res = await axios.post(url, bodyContent);
+      setIsLoading(false);
       if (res.status == 200) {
         navigateTo(`/swap-tgapp/status/${res.data.id}`);
       }
     } catch (error) {
+      showAlert();
+      setIsLoading(false);
+      setAlertContent(error.response.data.description);
       console.error('Error:', error);
     }
   }
 
+  const showAlert = () => {
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 2000);
+  };
+
   return (
     <>
       <>
-        <div>
+        <div className="relative">
           <Navbar />
         </div>
         <div className="">
@@ -80,10 +96,13 @@ const Exchange = ({ props }) => {
                       focus:border-blue-500' />
                 </div>
               </div>
-              <div className='bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
+              <div className='cursor-pointer rounded-xl h-12 mt-4 mx-4 my-5 flex justify-center'>
                 <button
                   onClick={handleSwap}
-                  className='p-1 text-center flex justify-center items-center  text-white text-[18px] font-[500] bold font-sans'>Exchange</button>
+                  className='w-full p-1 text-center flex justify-center items-center rounded-xl bg-[#0F75FC] hover:bg-[#0F75FC]/60 text-white 
+                  text-[18px] font-[500] bold font-sans focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
+                  Exchange
+                </button>
               </div>
               <div className='mb-5' >
                 <p className='text-center'>By clicking Create an exchange, I agree to the <a href="" className='text-blue-700 underline ' >Privacy Policy</a> and <a href="" className='text-blue-700 underline ' >Terms of Service</a>. </p>
@@ -152,6 +171,18 @@ const Exchange = ({ props }) => {
           </div>
         </div>
         <Footer />
+        <div className={`fixed top-0 left-0 z-50 w-screen h-screen flex items-center justify-center bg-gray-800 bg-opacity-75 ${isLoading ? '' : 'hidden'}`}>
+          <div className="custom-spinner"></div>
+        </div>
+        {alert && <div class="absolute top-0 right-0 flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span class="sr-only">Info</span>
+          <div>
+            <span class="font-medium">Warning!</span> {alertContent}
+          </div>
+        </div>}
       </>
     </>
   );
