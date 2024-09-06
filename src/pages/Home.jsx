@@ -1,128 +1,84 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
-import Footer from '../Components/Footer'
-import Card1 from '../Components/Card1'
 import Card2 from '../Components/Card2'
-import FiatCard from '../Components/FiatCard'
-import Trustpilot from '../Components/Trustpilot'
-import Currency from '../Components/Currency'
-import How_it_works from '../Components/How_it_works'
-import screen_lock from '../assets/screen_lock.png'
-import coin from '../assets/coins.png'
-import lock from '../assets/lock.png'
-import hf from '../assets/hf.png'
+import Footer from '../Components/Footer'
+import privacy_icon from '../assets/Home Infographics/PrivacyLogo.svg'
+import variety_icon from '../assets/Home Infographics/VarietyLogo.svg'
+import safety_icon from '../assets/Home Infographics/SafetyLogo.svg'
+import support_icon from '../assets/Home Infographics/SupportLogo.svg'
 import MainForm from '../Components/MainForm'
+import transitionFade from '../assets/transitionfade.svg'
+import CardShadow from '../assets/CardShadow.svg'
 
 const cards = [
   {
     id: 0,
     title: 'Privacy',
-    img: screen_lock,
+    img: privacy_icon,
     text1: 'Sign-up is not required',
-    text2: 'SimpleSwap provides cryptocurrency exchange without registration.'
+    text2: 'TeleSwap provides cryptocurrency exchange without User registration'
   },
   {
     id: 1,
     title: 'Wide choice',
-    img: coin,
-    text1: '1000 cryptocurrencies',
-    text2: 'Hundreds of crypto and fiat currencies are available for exchange.'
+    img: variety_icon,
+    text1: '750+ cryptocurrencies',
+    text2: 'Enjoy exchanging an incredible variety of Cryptocurrencies.'
   },
   {
     id: 2,
     title: 'Safety',
-    img: lock,
+    img: safety_icon,
     text1: 'Non-custodial',
-    text2: 'Crypto is sent directly to your wallet, we don’t store it on our service.'
+    text2: 'Crypto is sent directly to your wallet, we do not store it on our service.'
   },
   {
     id: 3,
     title: '24/7 support',
-    img: hf,
-    text1: 'You wont be left alone',
-    text2: 'Our support team is easy to reach and ready to answer your questions.'
+    img: support_icon,
+    text1: 'We are always here',
+    text2: 'Our Support team is easily reached, We are here to answer your questions.'
   },
 ]
 
-const roundedTrClass = ' bg-[#E0E9F1] hover:bg-blue-100';
-const roundedBlClass = 'rounded-bl-[45px]';
-const roundedBrClass = 'rounded-br-[45px]';
-
 const Home = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
-  const [isActive, setIsActive] = useState(true);
-
-  const handleClick = () => {
-    setIsActive(!isActive);
-  };
 
   return (
     <>
-      <div className='h-[550px]'>
+      <div className='min-h-screen flex flex-col relative' style={{ background: 'linear-gradient(to bottom, #E8E8E8, #C4EBF4, #7ECEE8)' }}>
         <Navbar />
-        <div>
-          <div className='flex text-white flex-col justify-center p-4 items-center'>
-            <h1 className='text-white leading-relaxed text-[40px]'>Crypto Exchange</h1>
-            <p className='text-md font-normal  leading-tight text-center '>Free from sign-up, limits, complications</p>
+        <div className='flex-grow container mx-auto px-4 py-8'>
+          <div className='text-center mb-8'>
+            <h1 className='text-4xl font- mb-2'>Crypto Exchange</h1>
+            <p className='text-xl'>forget sign ups, just swap</p>
           </div>
-          <div className='p-1'>
-            <div className='bg-white rounded-3xl drop-shadow-xl '>
-              <div className='w-full flex cursor-pointer'>
-                <div className={`w-1/2 ${!isActive ? `${roundedTrClass} ${roundedBrClass}` : ''} 
-                    text-[14px] font-semibold rounded-tl-3xl p-3 text-black/50 flex justify-center items-center`}
-                  onClick={handleClick}
-                >
-                  <h1>Crypto Exchange</h1>
-                </div>
-                <div className={`w-1/2  p-3 rounded-tr-3xl text-[14px]  text-black/50 font-semibold  flex justify-center items-center  
-                  ${isActive ? `${roundedTrClass} ${roundedBlClass}` : ''}`}
-                  onClick={handleClick}>
-                  <span className="cursor-pointer">Buy/Sell Crypto</span>
+          <div className='flex justify-center'>
+            <MainForm {...{ exchangeInfo, setExchangeInfo }} />
+          </div>
+        </div>
+        <img src={transitionFade} alt="Transition Fade" className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full" style={{ zIndex: -10 }}/>
+      </div>
+      <div style={{ backgroundColor: 'white', width: '100%', padding: '2rem 0' }}>
+        <div className='container mx-auto px-4'>
+          <h2 className='text-3xl text-center mb-6'>Telegram's Premier<br /> Cross Chain Exchange</h2>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            {cards.map((card, index) => (
+              <div key={index} className="relative">
+                {(card.id === 0 || card.id === 3) && (
+                  <img src={CardShadow} alt="Card Shadow" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400%] h-[400%]"/>
+                )}
+                <div className="relative z-10">
+                  <Card2 {...card} />
                 </div>
               </div>
-
-              <div className='p-4 flex flex-col'>
-                <MainForm {...{ exchangeInfo, setExchangeInfo }} />
-                <Link to={'/swap-tgapp/exchange'}
-                  className='bg-[#0F75FC] hover:bg-[#0F75FC]/60 cursor-pointer rounded-xl h-12 mt-4 w-full  flex justify-center'>
-                  <button className='p-1 text-center flex justify-center items-center  text-white text-[18px] font-[500] font-sans'>Exchange</button>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-      <div>
-        <div className=''>
-          <div className='mx-3' >
-            <Card1 />
-            {
-              cards.map((props, index) => (
-                <Card2 key={index} {...props} />))
-            }
-            {/* <FiatCard /> */}
-            <Trustpilot />
-          </div>
-          <Currency />
-          <How_it_works />
-        </div>
-        <Footer />
-      </div>
+      <Footer />
     </>
   )
 }
+
 export default Home
-
-
-
-
-
-
-
-
-
-
-
-
-

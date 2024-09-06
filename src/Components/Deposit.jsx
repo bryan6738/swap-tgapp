@@ -3,13 +3,14 @@ import { IoCopyOutline } from "react-icons/io5";
 import s41 from '../assets/s41.svg'
 import s42 from '../assets/s42.svg'
 import a43 from '../assets/a43.svg'
-import s44 from '../assets/s44.svg'
+import IconPending from '../assets/IconPending.svg'
 import { MdInfoOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 
 const Deposit = ({ props }) => {
   const status = props;
   const [copied, setCopied] = useState(false);
+  const [showInfoBox, setShowInfoBox] = useState(true);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(status.address_from)
@@ -20,6 +21,10 @@ const Deposit = ({ props }) => {
         }, 600);
       })
       .catch((error) => console.error('Error copying to clipboard:', error));
+  };
+
+  const toggleInfoBox = () => {
+    setShowInfoBox(!showInfoBox);
   };
 
   const spinner = <div role="status">
@@ -45,27 +50,26 @@ const Deposit = ({ props }) => {
 
   return (
     <>
-      <div className='bg-[#141A2E] mx-4 rounded-t-2xl pb-5 ' >
-        <div className='text-center pt-5 ' >
-          <p className='text-white font-[700] ' >{swapStatus(status.status)}</p> </div>
-        <div className='flex justify-center mt-3 gap-x-2 items-center' >
-          <div className='text-yellow-500 mt-1 text-lg ' >
+      <div className='bg-[#141A2E] mx-4 rounded-2xl pb-5'>
+        <div className='text-center pt-5'>
+          <p className='text-white font-[700]'>{swapStatus(status.status)}</p>
+        </div>
+        <div className='flex justify-center mt-3 gap-x-2 items-center'>
+          <div className='text-yellow-500 mt-1 text-lg'>
             <div className=''>
               <img className='w-6 h-6' src={status.currencies[status.currency_from].image} alt="" />
             </div>
           </div>
           <div>
-            <p className='text-[16px] font-[600] text-white text-lg mt-1 ' >{`${status.amount_from} ${status.currency_from.toUpperCase()}`}</p>
+            <p className='text-[16px] font-[600] text-white text-lg mt-1'>{`${status.amount_from} ${status.currency_from.toUpperCase()}`}</p>
           </div>
         </div>
-        <div className='text-center mt-3 ' >
-          <p className='text-white text-sm ' >Deposite address: </p>
+        <div className='text-center mt-3'>
+          <p className='text-white text-sm'>Deposit address: </p>
         </div>
-        <div className='bg-[#0F75FC] mx-5 py-2 mb-3 rounded-md justify-around mt-5 flex items-center'>
-          <div>
-            <p className='text-white px-1 text-xs'>{status.address_from}</p>
-          </div>
-          <button className='bg-blue-400 relative text-white p-2 rounded-lg' onClick={copyToClipboard}>
+        <div className='bg-[#0F75FC] mx-7 py-2 mb-3 rounded-md mt-5 flex items-center justify-center relative'>
+          <p className='text-white px-2 text-xs text-center max-w-[80%] break-all'>{status.address_from}</p>
+          <button className='absolute right-1 bg-blue-400 text-white p-1 rounded-lg' onClick={copyToClipboard}>
             <IoCopyOutline />
           </button>
           {copied && (
@@ -75,64 +79,47 @@ const Deposit = ({ props }) => {
           )}
         </div>
       </div>
-      <div className='bg-white mx-4 pb-11 ' >
-        <div className='flex justify-between mx-3 my-3 pt-4 ' >
-          <div className='flex gap-x-2 ' >
-            <div className='bg-black h-fit p-1 mt-1 rounded-full  '>
-              <img src={s44} alt="" />
+      <div className='bg-white mx-4 pb-3 rounded-2xl'>
+        <div className='flex justify-between mx-3 my-3 pt-4'>
+          <div className='flex gap-x-2'>
+            <div className='h-fit p-1 mt-1 rounded-full' style={{ marginTop: '-1px' }}>
+              <img src={IconPending} alt="" className="w-3/4 h-3/4" />
             </div>
-            <div className='text-xs  mt-1' > Status: <br />{swapStatus(status.status)}</div>
+            <div className='flex flex-col mt-1'>
+              <span className='text-xs'>Status:</span>
+              <span className='text-base'>{swapStatus(status.status)}</span>
+            </div>
           </div>
-          <div className='flex gap-x-1 ' >
-
-            <div className={`${status.status == 'waiting' ? 'bg-gray-300' : 'bg-blue-400'} h-fit p-2 rounded-full font-bold`} >
-              {status.status == 'confirming' ? spinner : (<img src={a43} alt="" />)}
+          <div className='flex gap-x-1'>
+            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'waiting' ? 'bg-blue-400' : (status.status == 'confirming' ? 'bg-blue-400' : 'bg-gray-300')}`}>
+              {status.status == 'waiting' ? spinner : (status.status == 'confirming' ? spinner : <img src={a43} alt="" />)}
             </div>
-
-            <div className={`${(status.status == 'waiting' || status.status == 'confirming') ? 'bg-gray-300' : 'bg-blue-400'} 
-              h-fit p-2 rounded-full font-bold`} >
-              {status.status == 'exchanging' ? spinner : (<img src={s41} alt="" />)}
+            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'exchanging' ? 'bg-blue-400' : (['confirming', 'exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
+              {status.status == 'exchanging' ? spinner : <img src={s41} alt="" />}
             </div>
-            <div className={`${(status.status == 'sending' || status.status == 'finished') ? 'bg-blue-400' : 'bg-gray-300'} 
-              h-fit p-2 rounded-full font-bold`} >
-              {status.status == 'sending' ? spinner : (<img src={s42} alt="" />)}
+            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${['sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300'}`}>
+              {status.status == 'sending' ? spinner : <img src={s42} alt="" />}
             </div>
           </div>
         </div>
-        <div className='bg-[#F2F7FE] flex gap-x-2 px-3 py-3 rounded-r-xl  border-l-4 border-gray-600 ' >
-          <div className='text-gray-400 mt-1  ' >
-            <MdInfoOutline size={20} />
+        {showInfoBox && (
+          <div className='bg-[#F2F7FE] flex gap-x-2 px-3 py-3 rounded-xl '>
+            <div className='text-gray-400 mt-1'>
+              <MdInfoOutline size={20} />
+            </div>
+            <div>
+              <p className='text-[#859AB5] text-xs font-medium leading-tight'>
+                If you sent the coins and the status did not change immediately, do not worry. Our system needs a few minutes to detect the transaction.
+              </p>
+            </div>
+            <div className='text-gray-600 mt-1 cursor-pointer' onClick={toggleInfoBox}>
+              <IoClose size={20} />
+            </div>
           </div>
-          <div>
-            <p className='text-[#859AB5] text-xs font-medium leading-tight ' >
-              If you sent the coins and the status did not change immediately, do not worry. Our system needs a few minutes to detect the transaction.
-            </p>
-          </div>
-          <div className='text-gray-600 mt-1 ' >
-            <IoClose size={20} />
-          </div>
-        </div>
+        )}
       </div>
     </>
   )
 }
+
 export default Deposit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

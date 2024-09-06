@@ -1,23 +1,23 @@
+import React from 'react';
+
 const Card2 = (props) => {
-  const {id, title, img, text1, text2} = props
+  const { id, title, img, text1, text2 } = props;
   return (
-    <>
-      <div className='mx-1 mt-4 bg-[#082F77]  p-1 rounded-lg'>
-        <div className='flex justify-between mx-2'>
-          <div className='ml-[2%] mt-[5%]'> <p className='text-[#337bb6] text-sm font-bold'>{title}</p></div>
-          <div className='pt-2'><img src={img} alt="" width={120} className='-mb-9' /></div>
+    <div className='mx-1 mt-4 bg-[#7ECEE8] p-4 rounded-2xl' style={{ height: 'auto' }}>
+      <div className='flex'>
+        <div className='w-1/3 flex items-center justify-start'>
+          <img src={img} alt={title} className='w-36 h-36' />
         </div>
-        <div>
-          <div className='mx-1'  >
-            <p className='ml-[2%] text-white text-xl font-bold w-[55%]'>{text1}</p>
-          </div>
-          <div className='mx-1'  >
-            <p className='ml-[2%] text-[#337bb6]  text-[14px] font-[400]  my-3 w-40% leading-tight'>{text2}</p>
+        <div className='w-2/3 flex flex-col'>
+          <h3 className='text-[#082F77] text-2xl font-extrabold mb-7 montserrat-font' style={{ paddingLeft: '13px', letterSpacing: '0.05em' }}>{title}</h3>
+          <div>
+            <p className='text-white text-xl font-bold mb-2'>{text1}</p>
+            <p className='text-[#082F77] text-sm'>{text2}</p>
           </div>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Card2
+export default Card2;

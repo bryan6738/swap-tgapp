@@ -1,0 +1,4 @@
+0.3.2 Update
+Color fade on new section
+
+

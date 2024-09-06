@@ -1,0 +1,222 @@
+.main-card {
+  width: 374px;
+  background-color: #f2f2f2;
+  border-radius: 32px;
+  position: relative;
+  padding: 16px;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.swap-bar-container {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.swap-bar {
+  width: 100%;
+  height: 56px;
+  background-color: #e5e7eb;
+  border-radius: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+.input-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.text {
+  color: #898b8d;
+  font-size: 10px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+}
+
+.secondary-card {
+  width: 136px;
+  height: 56px;
+  background-color: #d1d5db;
+  border-radius: 50px;
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 24px;
+}
+
+.chevron-icon {
+  width: 24px;
+  height: 24px;
+  fill: #898b8d;
+}
+
+.middle-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  padding: 0 8px;
+}
+
+.floating-rate-container {
+  display: flex;
+  align-items: center;
+}
+
+.unlock-icon {
+  width: 16px;
+  height: 16px;
+  fill: #898b8d;
+  margin-right: 4px;
+}
+
+.floating-rate-text {
+  color: #898b8d;
+  font-size: 9px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+}
+
+.swap-button {
+  width: 32px;
+  height: 32px;
+  background-color: #d1d5db;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.swap-icon {
+  width: 24px;
+  height: 24px;
+  fill: #1075fc;
+}
+
+.exchange-button {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  text-decoration: none;
+}
+
+.exchange-button button {
+  width: 100%;
+  height: 48px;
+  background-color: #1075fc;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.amount-input {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4b5563;
+  width: 100%;
+  outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.coin-selector {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.coin-image {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+  z-index: 10;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.coin-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.coin-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.coin-item:hover {
+  background-color: #f3f4f6;
+}
+
+.coin-symbol {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.coin-name {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.amount-input-container {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.custom-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  left: 0;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
