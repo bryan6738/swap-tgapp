@@ -59,12 +59,16 @@ const Exchange = ({ props }) => {
       }
       
       window?.Telegram.WebApp?.ready();
-      await axios.post("https://2d0c-188-43-33-252.ngrok-free.app/log-history", {
-        username: window.Telegram.WebApp.initDataUnsafe?.user?.username,
-        currency_from: bodyContent.currency_from,
-        currency_to: bodyContent.currency_to,
-        amount: bodyContent.amount
-      });
+      try {
+        await axios.post("https://2d0c-188-43-33-252.ngrok-free.app/log-history", {
+          username: window.Telegram.WebApp.initDataUnsafe?.user?.username,
+          currency_from: bodyContent.currency_from,
+          currency_to: bodyContent.currency_to,
+          amount: bodyContent.amount
+        });
+      } catch (error) {
+        console.log(error);
+      }
       
       await new Promise(resolve => setTimeout(resolve, 500));
       const res = await axios.post(url, bodyContent);

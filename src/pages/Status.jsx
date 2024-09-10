@@ -33,7 +33,7 @@ const Status = () => {
 
   const ExchangeLogger = async () => {
     try {
-        const response = await axios.post('https://data-collection-bot-1-intuitivefuncti.replit.app/log-exchange', {
+        const response = await axios.post('https://99d1b5e3-6b3e-464e-916b-1f672e07b217-00-2ff1vas26uujj.sisko.replit.dev/log-exchange', {
           user_id: window.Telegram.WebApp.initDataUnsafe?.user?.id,
           amount: status.amount_from,
           currency_from: status.currency_from,
