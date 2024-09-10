@@ -2,13 +2,11 @@ import React from 'react';
 
 const SwapButton = () => {
   const handleClick = () => {
-    // Scroll to the top of the page
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
 
-    // Dispatch a custom event to notify other components
     const event = new CustomEvent('swapNowClicked');
     window.dispatchEvent(event);
   };

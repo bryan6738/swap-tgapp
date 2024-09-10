@@ -212,8 +212,16 @@
   border-top: 3px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  position: absolute;
   left: 0;
+}
+
+.dexlogo {
+  border: solid 2px;
+  width: 64px;
+  border-radius: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes spin {

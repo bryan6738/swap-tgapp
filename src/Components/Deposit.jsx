@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoCopyOutline } from "react-icons/io5";
 import s41 from '../assets/s41.svg'
 import s42 from '../assets/s42.svg'

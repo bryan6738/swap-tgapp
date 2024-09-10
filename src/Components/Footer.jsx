@@ -3,8 +3,9 @@ import transitionFadeTop from '../assets/transitionfadetop.svg';
 import StandardLogo from '../assets/StandardLogo.svg';
 import RotatingBox from './RotatingBox';
 import HomePageFooterSwap from './HomePageFooterSwap';
-import TelegramLogo from '../assets/telegram-logo.svg'; // Adjust the path as necessary
-import XLogo from '../assets/x-logo.svg'; // Adjust the path as necessary
+import TelegramLogo from '../assets/telegram-logo.svg';
+import XLogo from '../assets/x-logo.svg';
+import DexTool from '../assets/dextools-logo.svg';
 
 const Footer = () => {
   return (
@@ -56,6 +57,9 @@ const Footer = () => {
             <div className="flex space-x-6 mb-4">
               <a href="https://t.me/+EuvXPhPVd0ZkZTkx" target="_blank" rel="noopener noreferrer">
                 <img src={TelegramLogo} alt="Telegram" className="h-16 w-16" />
+              </a>
+              <a href="https://www.dextools.io/app/en/ton/pair-explorer/EQCSIiae_6OWjSwdBqi30AhFteOmXqqYam-ipDbYq6LR498r?t=1725825944429" className='dexlogo' target="_blank" rel="noopener noreferrer">
+                <img src={DexTool} alt="Dex" className="h-12 w-12" />
               </a>
               <a href="https://x.com/TeleSwapTON" target="_blank" rel="noopener noreferrer">
                 <img src={XLogo} alt="X (Twitter)" className="h-16 w-16" />

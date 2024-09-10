@@ -1,10 +1,11 @@
 import React from 'react'
 import { IoIosArrowDown } from "react-icons/io";
+
 const summaryStyle = {
   outline: 'none',
   cursor: 'pointer',
   margin: 0,
-  listStyleType: 'none', // This line removes the default bullet point
+  listStyleType: 'none',
 };
 
 const Faqs = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../Components/Navbar'
 import Card2 from '../Components/Card2'
 import Footer from '../Components/Footer'
@@ -51,13 +51,13 @@ const Home = ({ props }) => {
         <div className='flex-grow container mx-auto px-4 py-8'>
           <div className='text-center mb-8'>
             <h1 className='text-4xl font- mb-2'>Crypto Exchange</h1>
-            <p className='text-xl'>forget sign ups, just swap</p>
+            <p className='text-xl'>quick & easy, just swap</p>
           </div>
           <div className='flex justify-center'>
             <MainForm {...{ exchangeInfo, setExchangeInfo }} />
           </div>
         </div>
-        <img src={transitionFade} alt="Transition Fade" className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full" style={{ zIndex: -10 }}/>
+        <img src={transitionFade} alt="Transition Fade" className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full"/>
       </div>
       <div style={{ backgroundColor: 'white', width: '100%', padding: '2rem 0' }}>
         <div className='container mx-auto px-4'>

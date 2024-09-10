@@ -9,8 +9,10 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './LoadingSpinner.css';
 import transitionFade from '../assets/transitionfade.svg';
+import { sendMessage } from '../Components/SendMessage';
 
 const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
+let previousStatus = null;
 
 const Status = () => {
   const [status, setStatus] = useState();
@@ -29,12 +31,52 @@ const Status = () => {
       .catch((error) => console.error('Error copying to clipboard:', error));
   };
 
+  const ExchangeLogger = async () => {
+    try {
+        const response = await axios.post('https://data-collection-bot-1-intuitivefuncti.replit.app/log-exchange', {
+          user_id: window.Telegram.WebApp.initDataUnsafe?.user?.id,
+          amount: status.amount_from,
+          currency_from: status.currency_from,
+          currency_to: status.currency_to,
+          address_from: status.address_from,
+          address_to: status.address_to,
+        })
+
+        if (response.ok) {
+            console.log('Exchange data logged successfully');
+        } else {
+            console.error(`Failed to log exchange data. Status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  };
+
+  const handleStatusUpdate = (currentStatus) => {
+    if (previousStatus !== currentStatus) {
+      if (currentStatus === "waiting") {
+        sendMessage("Waiting on tokens to be deposited!");
+      } else if (currentStatus === "confirming") {
+        sendMessage("Tokens Received!");
+      } else if (currentStatus === "exchanging") {
+        sendMessage("Swapping tokens Now!");
+      } else if (currentStatus === "sending") {
+        sendMessage("Sending Your tokens now!");
+      } else if (currentStatus === "finished") {
+        sendMessage("Successfully Finished Exchange!");
+        ExchangeLogger();
+      }
+      previousStatus = currentStatus;
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`https://api.simpleswap.io/get_exchange?api_key=${api_key}&id=${id}`);
         setStatus(response.data);
         setIsLoading(false);
+        handleStatusUpdate(response.data.status);
         if (response.data.status !== 'finished' && response.data.status !== 'confirmed') {
           setTimeout(fetchData, 5000);
         }
@@ -43,6 +85,7 @@ const Status = () => {
         console.error('Error fetching data:', error);
       }
     };
+  
     const timer = setTimeout(fetchData, 5000);
     return () => clearTimeout(timer);
   }, [id]);
@@ -55,7 +98,6 @@ const Status = () => {
           <div>
             <Exchange_id props={status.id} />
             <Deposit props={status} />
-            {/* Add margin to create space between sections */}
             <div className="my-6 p-5 bg-white rounded-xl shadow-lg">
               <div className="flex flex-col bg-white">
                 <div>
@@ -79,7 +121,7 @@ const Status = () => {
                   <div className="flex items-center bg-gray-100 rounded-lg p-2 max-w-full">
                     <div className="flex-grow mr-2 min-w-0">
                       <p className="text-xs font-sans truncate">
-                        {status.address_to}
+                        {status.address_to }
                       </p>
                     </div>
                     <button className='bg-blue-400 text-white p-2 rounded-lg flex-shrink-0' onClick={copyToClipboard}>

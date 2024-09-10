@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "../Components/Footer";
 import Options from "../Components/Options";
 import Navbar from "../Components/Navbar";
 import ExchangeInfoInterface from "../Components/ExchangeInfoInterface";
-import ExchangeLogger from "../Components/ExchangeLogger";
 import { IoIosArrowDown } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -35,13 +34,6 @@ const Exchange = ({ props }) => {
   const [isTermsOfServiceOpen, setIsTermsOfServiceOpen] = useState(false);
   const navigateTo = useNavigate();
 
-  const onExchange = () => {
-    console.log('Exchange completed');
-    // Add any additional logic you want to execute after a successful exchange
-  };
-
-  const exchangeLogger = ExchangeLogger({ onExchange });
-
   const handleRefundAddress = (e) => {
     setRefundAddress(e.target.value);
   };
@@ -65,18 +57,16 @@ const Exchange = ({ props }) => {
       if (refundAddress) {
         bodyContent.user_refund_address = refundAddress;
       }
-      console.log('Attempting to log exchange data...');
-      try {
-        await exchangeLogger.logExchangeData();
-        console.log('Exchange data logged successfully');
-      } catch (logError) {
-        console.error('Failed to log exchange data:', logError);
-        // Continue with the exchange process even if logging fails
-      }
       
-      // Add a small delay to ensure logging is complete
+      window?.Telegram.WebApp?.ready();
+      await axios.post("https://2d0c-188-43-33-252.ngrok-free.app/log-history", {
+        username: window.Telegram.WebApp.initDataUnsafe?.user?.username,
+        currency_from: bodyContent.currency_from,
+        currency_to: bodyContent.currency_to,
+        amount: bodyContent.amount
+      });
+      
       await new Promise(resolve => setTimeout(resolve, 500));
-
       const res = await axios.post(url, bodyContent);
       setIsLoading(false);
       if (res.status === 200) {
@@ -87,14 +77,10 @@ const Exchange = ({ props }) => {
     } catch (error) {
       setIsLoading(false);
       if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
         setAlertContent(`API Error: ${error.response.data.message || error.response.data.description || 'Unknown error'}`);
       } else if (error.request) {
-        // The request was made but no response was received
         setAlertContent('No response received from the server. Please check your internet connection and try again.');
       } else {
-        // Something happened in setting up the request that triggered an Error
         setAlertContent(`Error: ${error.message}`);
       }
       showAlert();
