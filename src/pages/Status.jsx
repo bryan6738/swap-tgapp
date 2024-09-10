@@ -31,15 +31,16 @@ const Status = () => {
       .catch((error) => console.error('Error copying to clipboard:', error));
   };
 
-  const ExchangeLogger = async () => {
+  const ExchangeLogger = async (currentStatus) => {
+    window.Telegram.WebApp.ready();
     try {
         const response = await axios.post('https://99d1b5e3-6b3e-464e-916b-1f672e07b217-00-2ff1vas26uujj.sisko.replit.dev/log-exchange', {
           user_id: window.Telegram.WebApp.initDataUnsafe?.user?.id,
-          amount: status.amount_from,
-          currency_from: status.currency_from,
-          currency_to: status.currency_to,
-          address_from: status.address_from,
-          address_to: status.address_to,
+          amount: currentStatus.amount_from,
+          currency_from: currentStatus.currency_from,
+          currency_to: currentStatus.currency_to,
+          address_from: currentStatus.address_from,
+          address_to: currentStatus.address_to,
         })
 
         if (response.ok) {
@@ -48,25 +49,25 @@ const Status = () => {
             console.error(`Failed to log exchange data. Status: ${response.status}`);
         }
     } catch (error) {
-        console.error('Error:', error);
+        console.error(`Error: , ${error}`);
     }
   };
 
   const handleStatusUpdate = (currentStatus) => {
-    if (previousStatus !== currentStatus) {
-      if (currentStatus === "waiting") {
+    if (previousStatus !== currentStatus.status) {
+      if (currentStatus.status === "waiting") {
+        ExchangeLogger(currentStatus);
         sendMessage("Waiting on tokens to be deposited!");
-      } else if (currentStatus === "confirming") {
+      } else if (currentStatus.status === "confirming") {
         sendMessage("Tokens Received!");
-      } else if (currentStatus === "exchanging") {
+      } else if (currentStatus.status === "exchanging") {
         sendMessage("Swapping tokens Now!");
-      } else if (currentStatus === "sending") {
+      } else if (currentStatus.status === "sending") {
         sendMessage("Sending Your tokens now!");
-      } else if (currentStatus === "finished") {
+      } else if (currentStatus.status === "finished") {
         sendMessage("Successfully Finished Exchange!");
-        ExchangeLogger();
       }
-      previousStatus = currentStatus;
+      previousStatus = currentStatus.status;
     }
   };
 
@@ -76,7 +77,7 @@ const Status = () => {
         const response = await axios.get(`https://api.simpleswap.io/get_exchange?api_key=${api_key}&id=${id}`);
         setStatus(response.data);
         setIsLoading(false);
-        handleStatusUpdate(response.data.status);
+        handleStatusUpdate(response.data);
         if (response.data.status !== 'finished' && response.data.status !== 'confirmed') {
           setTimeout(fetchData, 5000);
         }
