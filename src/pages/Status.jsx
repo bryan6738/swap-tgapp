@@ -91,17 +91,16 @@ const Status = () => {
   const handleStatusUpdate = (currentStatus) => {
     if (previousStatus !== currentStatus.status) {
       if (currentStatus.status === "waiting") {
-        ExchangeLogger(currentStatus);
+        sendMessage("Waiting on tokens to be deposited!");
       } else if (currentStatus.status === "confirming") {
         sendMessage("Tokens Received!");
-        sendMessage("Waiting on tokens to be deposited!");
       } else if (currentStatus.status === "exchanging") {
         sendMessage("Swapping tokens Now!");
       } else if (currentStatus.status === "sending") {
         sendMessage("Sending Your tokens now!");
       } else if (currentStatus.status === "finished") {
         sendMessage("Successfully Finished Exchange!");
-        sendMessage("Waiting on tokens to be deposited!");
+        ExchangeLogger(currentStatus);
       }
       previousStatus = currentStatus.status;
     }
