@@ -91,7 +91,7 @@ const Deposit = ({ props }) => {
             </div>
           </div>
           <div className='flex gap-x-1'>
-            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'waiting' ? 'bg-blue-400' : (status.status == 'confirming' ? 'bg-blue-400' : 'bg-gray-300')}`}>
+            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'waiting' ? 'bg-blue-400' : (['confirming', 'exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
               {status.status == 'waiting' ? spinner : (status.status == 'confirming' ? spinner : <img src={a43} alt="" />)}
             </div>
             <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'exchanging' ? 'bg-blue-400' : (['confirming', 'exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
