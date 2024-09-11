@@ -94,7 +94,7 @@ const Deposit = ({ props }) => {
             <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'waiting' ? 'bg-blue-400' : (['confirming', 'exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
               {status.status == 'waiting' ? spinner : (status.status == 'confirming' ? spinner : <img src={a43} alt="" />)}
             </div>
-            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'exchanging' ? 'bg-blue-400' : (['confirming', 'exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
+            <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${status.status == 'exchanging' ? 'bg-blue-400' : (['exchanging', 'sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300')}`}>
               {status.status == 'exchanging' ? spinner : <img src={s41} alt="" />}
             </div>
             <div className={`h-fit p-2 rounded-full font-bold transition-colors duration-300 ${['sending', 'finished'].includes(status.status) ? 'bg-blue-400' : 'bg-gray-300'}`}>
