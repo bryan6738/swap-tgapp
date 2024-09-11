@@ -19,6 +19,7 @@ const Status = () => {
   let { id } = useParams();
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  window?.Telegram.WebApp?.ready();
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(status.address_from)
@@ -32,47 +33,59 @@ const Status = () => {
   };
 
   const ExchangeLogger = async (currentStatus) => {
-    window.Telegram.WebApp.ready();
     try {
-        const res_burate = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-        let res_inputUSD;
-        let res_outputUSD;
-        try {
-          res_inputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_from}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_from)}`);
-          res_outputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_to}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_to)}`);
-        } catch (error) {
-          console.log('Error: ', error);
-        }
-        const response = await axios.post('https://99d1b5e3-6b3e-464e-916b-1f672e07b217-00-2ff1vas26uujj.sisko.replit.dev/log-exchange', {
-          ExchangeID: currentStatus.id,
-          UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
-          AmountSent: currentStatus.amount_from,
-          AmountReceived: currentStatus.amount_to,
-          TokenSent: currentStatus.currency_from,
-          TokenReceived: currentStatus.currency_to,
-          InputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_from : (res_inputUSD.data || 0),
-          OutputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_to : (res_outputUSD.data || 0),
-          BTC_USDRate: res_burate.data.bitcoin.usd,
-          ExchangeTimestamp: currentStatus.timestamp,
-          ExchangeFinished: currentStatus.status === "finished" || currentStatus.status === "confirmed",
-          AddressSent: currentStatus.address_from,
-          AddressReceived: currentStatus.address_to,
-          UserAgent: navigator.userAgent,
-          SiteLanguage: navigator.language || navigator.userLanguage,
-          AcceptLanguage: navigator.languages ? navigator.languages.join(', ') : siteLanguage,
-          DeviceTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-          DeviceOperatingSystem: getDeviceOperatingSystem()
-        })
+      const res_burate = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+      let res_inputUSD;
+      let res_outputUSD;
+      try {
+        res_inputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_from}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_from)}`);
+        res_outputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_to}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_to)}`);
+      } catch (error) {
+        console.log('Error: ', error);
+      }
+      const response = await axios.post('https://99d1b5e3-6b3e-464e-916b-1f672e07b217-00-2ff1vas26uujj.sisko.replit.dev/log-exchange', {
+        ExchangeID: currentStatus.id,
+        UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
+        AmountSent: currentStatus.amount_from,
+        AmountReceived: currentStatus.amount_to,
+        TokenSent: currentStatus.currency_from,
+        TokenReceived: currentStatus.currency_to,
+        InputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_from : (res_inputUSD.data || 0),
+        OutputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_to : (res_outputUSD.data || 0),
+        BTC_USDRate: res_burate.data.bitcoin.usd,
+        ExchangeTimestamp: currentStatus.timestamp,
+        ExchangeFinished: currentStatus.status === "finished" || currentStatus.status === "confirmed",
+        AddressSent: currentStatus.address_from,
+        AddressReceived: currentStatus.address_to,
+        UserAgent: navigator.userAgent,
+        SiteLanguage: navigator.language || navigator.userLanguage,
+        AcceptLanguage: navigator.languages ? navigator.languages.join(', ') : siteLanguage,
+        DeviceTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        DeviceOperatingSystem: getDeviceOperatingSystem()
+      })
 
-        if (response.ok) {
-            console.log('Exchange data logged successfully');
-        } else {
-            console.error(`Failed to log exchange data. Status: ${response.status}`);
-        }
+      if (response.ok) {
+        console.log('Exchange data logged successfully');
+      } else {
+        console.error(`Failed to log exchange data. Status: ${response.status}`);
+      }
     } catch (error) {
-        console.error(`Error: , ${error}`);
+      console.error(`Error: , ${error}`);
     }
   };
+
+  const processingStatus = (currentStatus) => {
+    try {
+      axios.post("https://simpleswap-m4vc.onrender.com/processing", {
+        username: window.Telegram.WebApp.initDataUnsafe?.user?.username,
+        currency_from: currentStatus.currency_from,
+        currency_to: currentStatus.currency_to,
+        amount: currentStatus.amount_from
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const getDeviceOperatingSystem = () => {
     const userAgent = window.navigator.userAgent;
@@ -84,9 +97,8 @@ const Status = () => {
     else if (userAgent.indexOf("Linux") !== -1) os = "Linux";
     else if (/Android/.test(userAgent)) os = "Android";
     else if (/iPhone|iPad|iPod/.test(userAgent)) os = "iOS";
-
     return os;
-}
+  }
 
   const handleStatusUpdate = (currentStatus) => {
     if (previousStatus !== currentStatus.status) {
@@ -95,6 +107,7 @@ const Status = () => {
       } else if (currentStatus.status === "confirming") {
         sendMessage("Tokens Received!");
         ExchangeLogger(currentStatus);
+        processingStatus(currentStatus);
       } else if (currentStatus.status === "exchanging") {
         sendMessage("Swapping tokens Now!");
       } else if (currentStatus.status === "sending") {
@@ -122,7 +135,7 @@ const Status = () => {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     const timer = setTimeout(fetchData, 5000);
     return () => clearTimeout(timer);
   }, [id]);
@@ -158,7 +171,7 @@ const Status = () => {
                   <div className="flex items-center bg-gray-100 rounded-lg p-2 max-w-full">
                     <div className="flex-grow mr-2 min-w-0">
                       <p className="text-xs font-sans truncate">
-                        {status.address_to }
+                        {status.address_to}
                       </p>
                     </div>
                     <button className='bg-blue-400 text-white p-2 rounded-lg flex-shrink-0' onClick={copyToClipboard}>
