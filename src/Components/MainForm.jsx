@@ -81,9 +81,9 @@ const CoinDropdown = ({ show, searchValue, handleSearch, tempCoinList, handleCoi
               onClick={() => handleCoinSelect(item.coin)}
               className="coin-item"
             >
-              <img src={item.coin.image} alt={item.coin.symbol} className="coin-image" />
-              <span className="coin-symbol">{item.coin.symbol.toUpperCase()}</span>
-              <span className="coin-name">{item.coin.name}</span>
+              <img src={item.coin?.image} alt={item.coin?.symbol} className="coin-image" />
+              <span className="coin-symbol">{item.coin?.symbol.toUpperCase()}</span>
+              <span className="coin-name">{item.coin?.name}</span>
             </div>
           )
         ))}
@@ -190,8 +190,8 @@ const MainForm = (props) => {
   const handleSearch = (e, setSearchValue, setShowDropdown) => {
     let tempCoins = tempCoinList.map((item) => ({
       ...item,
-      visible: item.coin.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        item.coin.symbol.toLowerCase().includes(e.target.value.toLowerCase())
+      visible: item.coin?.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+        item.coin?.symbol.toLowerCase().includes(e.target.value.toLowerCase())
     }));
     setTempCoinList(tempCoins);
     setSearchValue(e.target.value);
