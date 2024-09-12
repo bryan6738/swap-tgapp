@@ -32,17 +32,25 @@ const Status = () => {
       .catch((error) => console.error('Error copying to clipboard:', error));
   };
 
+  const getUSDTvalue = async (currency, amount = 0) => {
+    try {
+      if (currency.includes('usdt')) {
+        return amount;
+      } else {
+        const usdValue = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currency}&currency_to=usdttrc20&amount=${parseFloat(amount)}`);
+        return usdValue.data;
+      }
+    } catch (error) {
+      console.log(error)
+      return amount;
+    }
+  }
+
   const ExchangeLogger = async (currentStatus) => {
     try {
       const res_burate = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-      let res_inputUSD;
-      let res_outputUSD;
-      try {
-        res_inputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_from}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_from)}`);
-        res_outputUSD = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${currentStatus.currency_to}&currency_to=usdttrc20&amount=${parseFloat(currentStatus.amount_to)}`);
-      } catch (error) {
-        console.log('Error: ', error);
-      }
+      const inputTokenUSDTValue = await getUSDTvalue(currentStatus.currency_from, currentStatus.amount_from);
+      const outputTokenUSDTValue = await getUSDTvalue(currentStatus.currency_to, currentStatus.amount_to);
       const response = await axios.post('https://f0f3c714-c3af-42b7-b7f7-fd57392d628a-00-3u25eaqk15fw2.pike.replit.dev/log-exchange', {
         ExchangeID: currentStatus.id,
         UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
@@ -50,8 +58,8 @@ const Status = () => {
         AmountReceived: currentStatus.amount_to,
         TokenSent: currentStatus.currency_from,
         TokenReceived: currentStatus.currency_to,
-        InputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_from : (res_inputUSD.data || 0),
-        OutputTokenUSDTValue: currentStatus.currency_from.includes('usdt') ? currentStatus.amount_to : (res_outputUSD.data || 0),
+        InputTokenUSDTValue: inputTokenUSDTValue,
+        OutputTokenUSDTValue: outputTokenUSDTValue,
         BTC_USDRate: res_burate.data.bitcoin.usd,
         ExchangeTimestamp: currentStatus.timestamp,
         ExchangeFinished: currentStatus.status === "finished" || currentStatus.status === "confirmed",
