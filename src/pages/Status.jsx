@@ -112,10 +112,10 @@ const Status = () => {
     if (previousStatus !== currentStatus.status) {
       if (currentStatus.status === "waiting") {
         sendMessage("Waiting on tokens to be deposited!");
-        processingStatus(currentStatus);
-        ExchangeLogger(currentStatus);
       } else if (currentStatus.status === "confirming") {
         sendMessage("Tokens Received!");
+        processingStatus(currentStatus);
+        ExchangeLogger(currentStatus);
       } else if (currentStatus.status === "exchanging") {
         sendMessage("Swapping tokens Now!");
       } else if (currentStatus.status === "sending") {

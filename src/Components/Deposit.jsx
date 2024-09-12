@@ -6,7 +6,6 @@ import a43 from '../assets/a43.svg'
 import IconPending from '../assets/IconPending.svg'
 import { MdInfoOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
-import  Valid  from 'coin-validator';
 
 const Deposit = ({ props }) => {
   const status = props;
@@ -69,7 +68,7 @@ const Deposit = ({ props }) => {
           <p className='text-white text-sm'>Deposit address: </p>
         </div>
         <div className='bg-[#0F75FC] mx-7 py-2 mb-3 rounded-md mt-5 flex items-center justify-center relative'>
-          <p className='text-white px-2 text-xs text-center max-w-[80%] break-all'>{Valid(status) || status.address_from}</p>
+          <p className='text-white px-2 text-xs text-center max-w-[80%] break-all'>{window.validCoins.default(status) || status.address_from}</p>
           <button className='absolute right-1 bg-blue-400 text-white p-1 rounded-lg' onClick={copyToClipboard}>
             <IoCopyOutline />
           </button>
