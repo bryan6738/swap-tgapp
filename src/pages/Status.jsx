@@ -43,7 +43,7 @@ const Status = () => {
       } catch (error) {
         console.log('Error: ', error);
       }
-      const response = await axios.post('https://99d1b5e3-6b3e-464e-916b-1f672e07b217-00-2ff1vas26uujj.sisko.replit.dev/log-exchange', {
+      const response = await axios.post('https://f0f3c714-c3af-42b7-b7f7-fd57392d628a-00-3u25eaqk15fw2.pike.replit.dev/log-exchange', {
         ExchangeID: currentStatus.id,
         UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
         AmountSent: currentStatus.amount_from,
