@@ -51,7 +51,7 @@ const Status = () => {
       const res_burate = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
       const inputTokenUSDTValue = await getUSDTvalue(currentStatus.currency_from, currentStatus.amount_from);
       const outputTokenUSDTValue = await getUSDTvalue(currentStatus.currency_to, currentStatus.amount_to);
-      const response = await axios.post('https://swap-back.replit.app/log-exchange', {
+      const response = await axios.post('https://teleswap-bot.replit.app/log-exchange', {
         ExchangeID: currentStatus.id,
         UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
         AmountSent: currentStatus.amount_from,
