@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { IoIosArrowDown } from "react-icons/io";
 import { FaUnlockAlt } from "react-icons/fa";
 import axios from 'axios';
-import './MainForm.css'; // Import the new CSS file
+import './MainForm.css'; 
 
 const popularCoins = ['ton', 'sol', 'eth', 'trx', 'bnb', 'btc', 'usdc', 'xrp', 'doge', 'ada',
   'shib', 'avax', 'usdt', 'dot', 'bch', 'near', 'link', 'matic', 'ltc', 'icp'];
@@ -38,9 +39,10 @@ const UnlockIcon = () => (
   </svg>
 );
 
-const FloatingRateText = ({ text = 'Floating Rate' }) => (
-  <div className="floating-rate-text">{text}</div>
-);
+const FloatingRateText = () => {
+  const { t } = useTranslation();
+  return <div className="floating-rate-text"> { t("Floating Rate") }</div>
+};
 
 const SwapIcon = () => (
   <svg className="swap-icon" viewBox="0 0 24 24">
@@ -52,45 +54,50 @@ const SwapButton = ({ onClick }) => (
   <div className="swap-button" onClick={onClick}><SwapIcon /></div>
 );
 
-const ExchangeButton = () => (
-  <Link to="/swap-tgapp/exchange" className="exchange-button">
+const ExchangeButton = () => {
+  const { t } = useTranslation();
+  return (<Link to="/exchange" className="exchange-button">
     <button
       className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50"
     >
-      Exchange
+      { t("Exchange") }
     </button>
-  </Link>
-);
+  </Link>)
+};
 
 
-const CoinDropdown = ({ show, searchValue, handleSearch, tempCoinList, handleCoinSelect }) => (
-  show && (
-    <div className="dropdown-menu">
-      <input
-        type="text"
-        value={searchValue}
-        onChange={handleSearch}
-        className="search-input"
-        placeholder="Search"
-      />
-      <div className="coin-list">
-        {tempCoinList.map((item, key) => (
-          item.visible && (
-            <div
-              key={key}
-              onClick={() => handleCoinSelect(item.coin)}
-              className="coin-item"
-            >
-              <img src={item.coin?.image} alt={item.coin?.symbol} className="coin-image" />
-              <span className="coin-symbol">{item.coin?.symbol.toUpperCase()}</span>
-              <span className="coin-name">{item.coin?.name}</span>
-            </div>
-          )
-        ))}
+const CoinDropdown = ({ show, searchValue, handleSearch, tempCoinList, handleCoinSelect }) => {
+  const { t } = useTranslation();
+
+  return (
+    show && (
+      <div className="dropdown-menu">
+        <input
+          type="text"
+          value={searchValue}
+          onChange={handleSearch}
+          className="search-input"
+          placeholder={t("Search")}
+        />
+        <div className="coin-list">
+          {tempCoinList.map((item, key) => (
+            item.visible && (
+              <div
+                key={key}
+                onClick={() => handleCoinSelect(item.coin)}
+                className="coin-item"
+              >
+                <img src={item.coin?.image} alt={item.coin?.symbol} className="coin-image" />
+                <span className="coin-symbol">{item.coin?.symbol?.toUpperCase()}</span>
+                <span className="coin-name">{item.coin?.name}</span>
+              </div>
+            )
+          ))}
+        </div>
       </div>
-    </div>
-  )
-);
+    )
+  );
+}
 
 const LoadingSpinner = () => (
   <div className="custom-spinner"></div>
@@ -108,7 +115,8 @@ const MainForm = (props) => {
   const [searchValue1, setSearchValue1] = useState('');
   const [searchValue2, setSearchValue2] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [minAmount, setMinAmount] = useState(0)
+  const [minAmount, setMinAmount] = useState(0);
+  const { t } = useTranslation();
 
   const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
 
@@ -225,7 +233,7 @@ const MainForm = (props) => {
       <div className="swap-bar-container">
         <SwapBar className="top-bar">
           <div className="input-text-container">
-            <Text text="You Send" />
+            <Text text={ t('You Send') } />
             <input 
               value={fromCoinAmount}
               onChange={handleChange}
@@ -259,7 +267,7 @@ const MainForm = (props) => {
       <div className="swap-bar-container">
         <SwapBar className="bottom-bar">
           <div className="input-text-container">
-            <Text text="You Get" />
+            <Text text={ t('You Get') } />
             <div className="amount-input-container">
               {isLoading ? (
                 <LoadingSpinner />

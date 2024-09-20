@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     const handleSwapNowClick = () => {
       setExchangeInfo(initInfo);
-      navigate('/swap-tgapp/', { replace: true });
+      navigate('/', { replace: true });
     };
 
     window.addEventListener('swapNowClicked', handleSwapNowClick);
@@ -40,15 +40,15 @@ function App() {
   return (
     <Routes>
       <Route
-        path='/swap-tgapp/'
+        path='/'
         element={<Home props={{ exchangeInfo, setExchangeInfo }} />}
       />
       <Route
-        path='/swap-tgapp/exchange'
+        path='/exchange'
         element={<Exchange props={{ exchangeInfo, setExchangeInfo }} />}
       />
-      <Route path='/swap-tgapp/status/:id' element={<Status />} />
-      <Route path='/swap-tgapp/roadmap' element={<RoadMap />} />
+      <Route path='/status/:id' element={<Status />} />
+      <Route path='/roadmap' element={<RoadMap />} />
     </Routes>
   );
 }

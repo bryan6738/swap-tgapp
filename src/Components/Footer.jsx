@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import transitionFadeTop from '../assets/transitionfadetop.svg';
 import StandardLogo from '../assets/StandardLogo.svg';
 import RotatingBox from './RotatingBox';
@@ -8,6 +9,8 @@ import XLogo from '../assets/x-logo.svg';
 import DexTool from '../assets/dextools-logo.svg';
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-white relative">
       <div className="absolute top-0 left-0 w-full z-10">
@@ -26,7 +29,7 @@ const Footer = () => {
           <div className="flex items-center justify-center flex-col">
             <img src={StandardLogo} alt="Standard Logo" className="w-64 h-64 mb-4" />
             <div className="text-center">
-              <h2 className="text-4xl font-bold montserrat-font mb-3">Customer Reviews</h2>
+              <h2 className="text-4xl font-bold montserrat-font mb-3">{ t('Customer Reviews') }</h2>
               <div className="flex justify-center">
                 {[...Array(5)].map((_, i) => (
                   <svg

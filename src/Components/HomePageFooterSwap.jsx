@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const SwapButton = () => {
+  const { t } = useTranslation();
+
   const handleClick = () => {
     window.scrollTo({
       top: 0,
@@ -19,7 +22,7 @@ const SwapButton = () => {
         boxShadow: '0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1)',
       }}
     >
-      Swap Now
+      { t("Swap Now") }
     </button>
   );
 };

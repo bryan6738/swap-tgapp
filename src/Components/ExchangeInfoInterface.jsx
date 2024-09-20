@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const styles = {
   MainCard: {
@@ -19,7 +20,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     padding: '0 16px',
-    marginBottom: '30px', // Adjusted for better spacing between cards
+    marginBottom: '30px',
   },
   OutputCard: {
     width: '100%',
@@ -30,7 +31,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     padding: '0 16px',
-    marginTop: '30px', // Adjusted for better spacing between cards
+    marginTop: '30px',
   },
   CurrencyCard: {
     width: '136px',
@@ -67,7 +68,7 @@ const styles = {
     color: '#000',
     fontSize: '12px',
     fontFamily: '"Work Sans", sans-serif',
-    fontWeight: 400, // Changed from 600 to 400 to remove boldness
+    fontWeight: 400,
     marginLeft: '8px',
   },
   FloatingRateText: {
@@ -121,8 +122,9 @@ const CurrencyText = ({ currency, symbol, image }) => {
   );
 };
 
-const FloatingRateText = ({ text = 'Floating Rate' }) => {
-  return <div style={styles.FloatingRateText}>{text}</div>;
+const FloatingRateText = () => {
+  const { t } = useTranslation();
+  return <div style={styles.FloatingRateText}> { t("Floating Rate") }</div>
 };
 
 const IconComponent = () => (
@@ -132,10 +134,12 @@ const IconComponent = () => (
 );
 
 const ExchangeInfoInterface = ({ exchangeInfo }) => {
+  const { t } = useTranslation(); 
+
   return (
     <div style={styles.MainCard}>
       <div style={styles.InputCard}>
-        <LabelText text="You Send" />
+        <LabelText text={t("You Send")} />
         <AmountText amount={exchangeInfo.fromCoinAmount} />
       </div>
       <div style={{ ...styles.CurrencyCard, ...styles.CurrencyCardSend }}>
@@ -146,7 +150,7 @@ const ExchangeInfoInterface = ({ exchangeInfo }) => {
         />
       </div>
       <div style={styles.OutputCard}>
-        <LabelText text="You Get" />
+        <LabelText text={t("You Get")} />
         <AmountText amount={exchangeInfo.toCoinAmount} />
       </div>
       <div style={{ ...styles.CurrencyCard, ...styles.CurrencyCardGet }}>

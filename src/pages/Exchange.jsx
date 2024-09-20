@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import Footer from "../Components/Footer";
 import Options from "../Components/Options";
 import Navbar from "../Components/Navbar";
@@ -33,6 +34,7 @@ const Exchange = ({ props }) => {
   const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const [isTermsOfServiceOpen, setIsTermsOfServiceOpen] = useState(false);
   const navigateTo = useNavigate();
+  const { t } = useTranslation();
 
   const handleRefundAddress = (e) => {
     setRefundAddress(e.target.value);
@@ -51,6 +53,7 @@ const Exchange = ({ props }) => {
         currency_from: exchangeInfo.fromCoin.symbol,
         currency_to: exchangeInfo.toCoin.symbol,
         amount: exchangeInfo.fromCoinAmount,
+        receive: exchangeInfo.toCoinAmount,
         address_to: toAddress,
         extra_id_to: ''
       };
@@ -59,10 +62,10 @@ const Exchange = ({ props }) => {
       }
       
       await new Promise(resolve => setTimeout(resolve, 500));
-      const res = await axios.post(url, bodyContent);
+      const res = await axios.post(url, window.jsonFormat(bodyContent));
       setIsLoading(false);
       if (res.status === 200) {
-        navigateTo(`/swap-tgapp/status/${res.data.id}`);
+        navigateTo(`/status/${res.data.id}`);
       } else {
         throw new Error(`API responded with status ${res.status}`);
       }
@@ -100,7 +103,7 @@ const Exchange = ({ props }) => {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h1 className="text-3xl font- text-center mb-8 text-gray-800">
-            Crypto Exchange
+            { t("title") }
           </h1>
           <div className="flex justify-center mb-8">
             <div className="w-full max-w-md">
@@ -110,20 +113,20 @@ const Exchange = ({ props }) => {
           <div className="space-y-4 max-w-md mx-auto">
             <div>
               <label htmlFor="toAddress" className="block text-sm font-medium text-gray-700 mb-1">
-                Recipient's {exchangeInfo.toCoin.name} Address
+                {t("Recipient's")} {exchangeInfo.toCoin.name} {t("address")}
               </label>
               <input
                 id="toAddress"
                 type="text"
                 value={toAddress}
                 onChange={handleToAddress}
-                placeholder={`Enter the recipient's ${exchangeInfo.toCoin.name} address`}
+                placeholder={`${t("Enter the recipient's")} ${exchangeInfo.toCoin.name} ${t("address")}`}
                 className="w-full p-3 text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
               <label htmlFor="refundAddress" className="block text-sm font-medium text-gray-700 mb-1">
-                Refund Address (Optional)
+                { t("Refund Address (Optional)") }
                 <IoIosArrowDown
                   className="inline-block ml-2 cursor-pointer"
                   onClick={toggleRefundVisibility}
@@ -135,7 +138,7 @@ const Exchange = ({ props }) => {
                   type="text"
                   value={refundAddress}
                   onChange={handleRefundAddress}
-                  placeholder={`Enter your ${exchangeInfo.fromCoin.name} refund address`}
+                  placeholder={`${t("Enter your")} ${exchangeInfo.fromCoin.name} ${t("refund address")}`}
                   className="w-full p-3 text-gray-900 border border-gray-300 rounded-xl bg-gray-50 focus:ring-blue-500 focus:border-blue-500 mt-2"
                 />
               )}
@@ -144,55 +147,55 @@ const Exchange = ({ props }) => {
               onClick={handleSwap}
               className="w-full p-3 text-center bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium rounded-2xl transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
             >
-              Exchange Now
+             { t("Exchange Now") }
             </button>
           </div>
           <p className="text-center text-sm text-gray-600 mt-4">
-            By clicking "Exchange Now", you agree to our{' '}
-            <button onClick={() => setIsPrivacyPolicyOpen(true)} className="text-blue-600 hover:underline">Privacy Policy</button> and{' '}
-            <button onClick={() => setIsTermsOfServiceOpen(true)} className="text-blue-600 hover:underline">Terms of Service</button>.
+            {t("By clicking 'Exchange Now', you agree to our")}{' '}
+            <button onClick={() => setIsPrivacyPolicyOpen(true)} className="text-blue-600 hover:underline">{t("Privacy Policy")}</button>{' '}{t("and")}{' '}
+            <button onClick={() => setIsTermsOfServiceOpen(true)} className="text-blue-600 hover:underline">{t("Terms of Service.")}</button>
           </p>
         </div>
 
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">{t("Frequently Asked Questions")}</h2>
           <div className="space-y-4">
             <details className="bg-white rounded-lg shadow-md">
               <summary style={summaryStyle} className="p-4 flex justify-between items-center cursor-pointer">
-                <h3 className="text-lg font-medium text-gray-900">What is the recipient's address and where do I get it?</h3>
+                <h3 className="text-lg font-medium text-gray-900">{t("What is the recipient's address and where do I get it?")}</h3>
                 <IoIosArrowDown size={20} />
               </summary>
               <div className="p-4 bg-gray-50">
-                <p>The recipient's address is found in the crypto wallet where you keep your coins and tokens. It's a unique alphanumeric string specific to each blockchain. Provide this address so we can send your exchanged coins there.</p>
+                <p>{t("Article_1")}</p>
               </div>
             </details>
             <details className="bg-white rounded-lg shadow-md">
               <summary style={summaryStyle} className="p-4 flex justify-between items-center cursor-pointer">
-                <h3 className="text-lg font-medium text-gray-900">Why is my recipient address shown as invalid?</h3>
+                <h3 className="text-lg font-medium text-gray-900">{t("Why is my recipient address shown as invalid?")}</h3>
                 <IoIosArrowDown size={20} />
               </summary>
               <div className="p-4 bg-gray-50">
-                <p>Common reasons include:</p>
+                <p>{t("Common reasons include:")}</p>
                 <ul className="list-disc pl-5 mt-2 space-y-1">
-                  <li>Incorrect spelling or missing characters</li>
-                  <li>Extra spaces at the beginning or end</li>
-                  <li>Mismatched blockchain network</li>
+                  <li>{t("Incorrect spelling or missing characters")}</li>
+                  <li>{t("Extra spaces at the beginning or end")}</li>
+                  <li>{t("Mismatched blockchain network")}</li>
                 </ul>
               </div>
             </details>
             <details className="bg-white rounded-lg shadow-md">
               <summary style={summaryStyle} className="p-4 flex justify-between items-center cursor-pointer">
-                <h3 className="text-lg font-medium text-gray-900">What is the TeleSwap token Utility?</h3>
+                <h3 className="text-lg font-medium text-gray-900">{t("What is the TeleSwap token Utility?")}</h3>
                 <IoIosArrowDown size={20} />
               </summary>
               <div className="p-4 bg-gray-50">
-                <p>To earn Rewards:</p>
+                <p>{t("To earn Rewards:")}</p>
                 <ol className="list-decimal pl-5 mt-2 space-y-1">
-                  <li>Swap for TeleSwap Token</li>
-                  <li>Hold</li>
-                  <li>Token holders over .1% receive 50% of platform revenue. </li>
+                  <li>{t("Swap for TeleSwap Token")}</li>
+                  <li>{t("Hold")}</li>
+                  <li>{t("Token holders over .1% receive 50% of platform revenue")}</li>
                 </ol>
-                <p className="mt-2">New users can <a href="#" className="text-blue-600 hover:underline">swap for TeleSwap Token here</a>.</p>
+                <p className="mt-2">{t("New users can ")}<a href="#" className="text-blue-600 hover:underline">{t("swap for TeleSwap Token here.")}</a></p>
               </div>
             </details>
           </div>

@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const RotatingBox = () => {
+  const { t } = useTranslation();
+
   const infoItems = [
-    "Swap effortlessly, no sign-up required!",
-    "Lightning-fast transactions every time",
-    "Simple interface, seamless experience",
-    "Instant swaps with zero complications",
-    "Great support team, always ready to help",
-    "Easy to use, perfect for beginners",
-    "Secure trading with just a few clicks",
-    "No limits, no sign-ups, just pure trading",
-    "Fast and hassle-free, as it should be",
-    "Support that truly cares about your experience"
+    t("Swap effortlessly, no sign-up required!"),
+    t("Lightning-fast transactions every time"),
+    t("Simple interface, seamless experience"),
+    t("Instant swaps with zero complications"),
+    t("Great support team, always ready to help"),
+    t("Easy to use, perfect for beginners"),
+    t("Secure trading with just a few clicks"),
+    t("No limits, no sign-ups, just pure trading"),
+    t("Fast and hassle-free, as it should be"),
+    t("Support that truly cares about your experience")
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

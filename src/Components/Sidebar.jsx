@@ -31,14 +31,12 @@ const Sidebar = () => {
           </button>
         </div>
 
-        {/* Add your sidebar content here */}
         <ul className="space-y-2 px-4">
           <li>
             <a href="#" className="text-xl block hover:text-gray-200">
               Link 1
             </a>
           </li>
-          {/* Add more sidebar links here */}
         </ul>
       </div>
     </>

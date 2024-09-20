@@ -3,8 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from 'react-i18next';
 
 const Navbar = ({ backgroundColor }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -29,31 +32,34 @@ const Navbar = ({ backgroundColor }) => {
         <ul>
           <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <Link
-              to={"/swap-tgapp/"}
+              to={"/"}
               className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
             >
-              Home
+              {t("home")}
             </Link>
           </li>
           <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <Link
-              to={"/swap-tgapp/roadmap"}
+              to={"/roadmap"}
               className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
             >
-              RoadMap
+              { t("roadmap") }
             </Link>
           </li>
         </ul>
       </div>
-      <div className="px-4 py-6" style={{ backgroundColor: backgroundColor || 'transparent' }}>
+      <div className="relative px-4 py-6" style={{ backgroundColor: backgroundColor || 'transparent' }}>
         <div className="flex w-full justify-between items-center h-full">
+          <div className="absolute left-4 top-10">
+            <LanguageSwitcher />
+          </div>
           <div className="flex-grow flex items-center justify-center">
-            <Link to="/swap-tgapp/" className="flex flex-col items-center text-xl font- text-white" style={{ marginLeft: '88px' }}>
+            <Link to="/" className="flex flex-col items-center text-xl font- text-white">
               <img src={logo} alt="TeleSwap Logo" className="w-12 mb-1" />
               <span>TeleSwap</span>
             </Link>
           </div>
-          <div onClick={toggleSidebar} className="cursor-pointer" style={{ marginRight: '35px' }}>
+          <div className="absolute cursor-pointer right-10" onClick={toggleSidebar}>
             <FaBars color="white" size={50} />
           </div>
         </div>
