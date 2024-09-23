@@ -20,7 +20,7 @@ const Home = ({ props }) => {
       id: 0,
       title: t("Privacy"),
       img: privacy_icon,
-      text1: t("PrivacySubTitile"),
+      text1: t("PrivacySubTitle"),
       text2: t("PrivacyContent")
     },
     {

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useTranslation } from 'react-i18next';
 import transitionFadeTop from '../assets/transitionfadetop.svg';
 import StandardLogo from '../assets/StandardLogo.svg';
+import StandardLogoR from '../assets/StandardLogoR.svg';
+import StandardLogoC from '../assets/StandardLogoC.svg';
 import RotatingBox from './RotatingBox';
 import HomePageFooterSwap from './HomePageFooterSwap';
 import TelegramLogo from '../assets/telegram-logo.svg';
@@ -9,7 +11,18 @@ import XLogo from '../assets/x-logo.svg';
 import DexTool from '../assets/dextools-logo.svg';
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [slogo, setSlogo] = useState(StandardLogo);
+
+  useEffect(() => {
+    if (i18n.language === 'en') {
+      setSlogo(StandardLogo);
+    } else if (i18n.language === 'ru') {
+      setSlogo(StandardLogoR);
+    } else {
+      setSlogo(StandardLogoC);
+    }
+  }, [i18n.language]);
 
   return (
     <footer className="bg-white relative">
@@ -27,7 +40,7 @@ const Footer = () => {
       }}>  
         <div className="container mx-auto px-7 py-14 text-white">
           <div className="flex items-center justify-center flex-col">
-            <img src={StandardLogo} alt="Standard Logo" className="w-64 h-64 mb-4" />
+            <img src={slogo} alt="Standard Logo" className="w-64 h-64 mb-4" />
             <div className="text-center">
               <h2 className="text-4xl font-bold montserrat-font mb-3">{ t('Customer Reviews') }</h2>
               <div className="flex justify-center">
