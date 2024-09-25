@@ -87,6 +87,7 @@
     "Answer_3": "请确保复制您的兑换 ID，以便我们需要查找您的兑换时使用。如果您需要帮助，请联系 support@teleswap.io 我们的支持团队。",
     "Copied address to clipboard": "地址已复制到剪贴板",
     "Copied to clipboard": "已复制到剪贴板",
+    "Transaction Hash:": "交易哈希:",
 
     "Exchange Started, waiting on": "兑换已开始，等待存入",
     " to be deposited! Your exchange ID is": "！您的兑换 ID 是",

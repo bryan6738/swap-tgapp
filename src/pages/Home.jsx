@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../Components/Navbar'
 import Card2 from '../Components/Card2'
 import Footer from '../Components/Footer'
@@ -10,10 +10,27 @@ import MainForm from '../Components/MainForm'
 import transitionFade from '../assets/transitionfade.svg'
 import CardShadow from '../assets/CardShadow.svg'
 import { useTranslation } from 'react-i18next';
+import axios from "axios";
+import { sendMessage } from '../Components/SendMessage';
 
 const Home = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  window?.Telegram.WebApp?.ready();
+
+  useEffect(() => {
+    const userID = window.Telegram.WebApp.initDataUnsafe?.user?.id;
+    if (userID) {
+      axios
+        .get(`https://teleswap-bot.replit.app/lang/${userID}`)
+        .then((response) => {
+          i18n.changeLanguage(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching user language:", error);
+        });
+    }
+  }, []);
 
   const cards = [
     {

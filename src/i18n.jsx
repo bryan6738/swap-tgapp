@@ -19,7 +19,7 @@ i18n
             ch: { translation: ch }
         },
         fallbackLng: 'en',  // Default language if no translation is available
-        debug: true,
+        debug: false,
         interpolation: {
             escapeValue: false // React already does escaping
         }

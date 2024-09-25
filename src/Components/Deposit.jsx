@@ -8,19 +8,27 @@ import { MdInfoOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { useTranslation } from 'react-i18next';
 
-const Deposit = ({ props }) => {
-  const status = props;
-  const [copied, setCopied] = useState(false);
+const Deposit = ({ status }) => {
+  const [copied, setCopied] = useState('');
   const [showInfoBox, setShowInfoBox] = useState(true);
+  const hash = status.tx_to
+  ? status.currencies[
+    status.currency_to
+    ].tx_explorer.replace("{}", status.tx_to)
+  : null;
+  const address = window.validAddress 
+    ? (window.validAddress(status) || status.address_from) 
+    : status.address_from;
   const { t } = useTranslation();
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (item) => {
+    const text = item == "address" ? status.address_from : hash;
     navigator.clipboard
-      .writeText(status.address_from)
+      .writeText(text)
       .then(() => {
-        setCopied(true);
+        setCopied(item);
         setTimeout(() => {
-          setCopied(false);
+          setCopied('');
         }, 600);
       })
       .catch((error) => console.error("Error copying to clipboard:", error));
@@ -76,7 +84,7 @@ const Deposit = ({ props }) => {
             <div className="">
               <img
                 className="w-6 h-6"
-                src={status.currencies[status.currency_from].image}
+                src={status?.currencies[status?.currency_from]?.image}
                 alt=""
               />
             </div>
@@ -88,22 +96,44 @@ const Deposit = ({ props }) => {
         <div className="text-center mt-3">
           <p className="text-white text-sm">{t("Deposit address:")} </p>
         </div>
-        <div className="bg-[#0F75FC] mx-7 py-2 mb-3 rounded-md mt-5 flex items-center justify-center relative">
-          <p className="text-white px-2 text-xs text-center max-w-[80%] break-all">
-            {window.validAddress(status) || status.address_from}
+        <div className="bg-[#0F75FC] mx-7 px-2 py-2 mb-5 rounded-md mt-3 flex items-center justify-between relative">
+          <p className="text-white px-2 text-xs break-all">
+            {address}
           </p>
           <button
-            className="absolute right-1 bg-blue-400 text-white p-1 rounded-lg"
-            onClick={copyToClipboard}
+            className="right-1 bg-blue-400 text-white p-1 rounded-lg"
+            onClick={() => copyToClipboard("address")}
           >
             <IoCopyOutline />
           </button>
-          {copied && (
+          {(copied == "address") && (
             <div className="absolute text-sm -mt-12 right-0 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out">
               {t("Copied address to clipboard")}
             </div>
           )}
         </div>
+
+        {hash && (<div>
+          <div className="text-center mt-3">
+            <p className="text-white text-sm">{t("Transaction Hash:")} </p>
+          </div>
+          <div className="bg-[#0F75FC] mx-7 px-2 py-2 mb-3 rounded-md mt-3 flex items-center justify-between relative">
+            <p className="text-white px-2 text-xs break-all">
+              {hash}
+            </p>
+            <button
+              className="right-1 bg-blue-400 text-white p-1 rounded-lg"
+              onClick={() => copyToClipboard("hash")}
+            >
+              <IoCopyOutline />
+            </button>
+            {(copied == "hash") && (
+              <div className="absolute text-sm -mt-12 right-0 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out">
+                {t("Copied to clipboard")}
+              </div>
+            )}
+          </div>
+        </div>)}
       </div>
       <div className="bg-white mx-4 pb-3 rounded-2xl">
         <div className="flex justify-between mx-3 my-3 pt-4">

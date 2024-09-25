@@ -10,7 +10,7 @@ const Card2 = (props) => {
         </div>
         <div className='w-2/3 flex flex-col'>
           <h3 className='text-[#082F77] text-2xl font-extrabold mb-7 montserrat-font' style={{ paddingLeft: '13px', letterSpacing: '0.05em' }}>{title}</h3>
-          <div>
+          <div  style={{ paddingLeft: '13px'}}>
             <p className='text-white text-xl font-bold mb-2'>{text1}</p>
             <p className='text-[#082F77] text-sm'>{text2}</p>
           </div>

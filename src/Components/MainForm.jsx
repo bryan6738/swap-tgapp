@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { debounce } from 'lodash';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { IoIosArrowDown } from "react-icons/io";
-import { FaUnlockAlt } from "react-icons/fa";
 import axios from 'axios';
 import './MainForm.css'; 
 
@@ -119,24 +118,42 @@ const MainForm = (props) => {
   const { t } = useTranslation();
 
   const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
+  const abortControllerRef = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = debounce(async () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort(); // Cancel any previous requests
+      }
+      abortControllerRef.current = new AbortController(); // Create new controller
+
       try {
-        const response = await axios.get(`https://api.simpleswap.io/get_all_currencies?api_key=${api_key}`);
-        const popularCoinList = popularCoins.map((item) => response.data.find((coin) => coin.symbol == item));
-        const allCoinList = response.data.filter((item) => !popularCoins.includes(item.symbol));
+        const response = await axios.get(
+          `https://api.simpleswap.io/get_all_currencies?api_key=${api_key}`,
+          { signal: abortControllerRef.current.signal } // Pass signal for cancellation
+        );
+        const popularCoinList = popularCoins.map((item) =>
+          response.data.find((coin) => coin.symbol === item)
+        );
+        const allCoinList = response.data.filter(
+          (item) => !popularCoins.includes(item.symbol)
+        );
         const coinList = [...popularCoinList, ...allCoinList];
-        const tempList = coinList.map(item => ({ coin: item, visible: true }));
+        const tempList = coinList.map((item) => ({ coin: item, visible: true }));
         setTempCoinList(tempList);
 
-        if(minAmount == 0){
-          getMinAmount()
+        if (minAmount === 0) {
+          getMinAmount();
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        if (axios.isCancel(error)) {
+          console.log('Previous request canceled');
+        } else {
+          console.error('Error fetching data:', error);
+        }
       }
-    };
+    }, 300); // Debounce input by 300ms
+
     fetchData();
   }, []);
 
@@ -150,36 +167,54 @@ const MainForm = (props) => {
     setExchangeInfo(info);
   }, [fromCoin, toCoin, fromCoinAmount, toCoinAmount]);
 
-  const getEstimateAmount = async (fromAmount) => {
+  const getEstimateAmount = debounce(async (fromAmount) => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    abortControllerRef.current = new AbortController();
+
     try {
-      setIsLoading(true);
-      const response = await axios.get(`https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${parseFloat(fromAmount)}`);
+      const response = await axios.get(
+        `https://api.simpleswap.io/get_estimated?api_key=${api_key}&fixed=false&currency_from=${fromCoin.symbol}&currency_to=${toCoin.symbol}&amount=${parseFloat(fromAmount)}`,
+        { signal: abortControllerRef.current.signal }
+      );
       setToCoinAmount(response.data);
       setIsLoading(false);
     } catch (error) {
-      setIsLoading(false);
-      console.error('Error getting Estimate Amount:', error);
+      if (!axios.isCancel(error)) {
+        console.error('Error getting Estimate Amount:', error);
+      }
+    }
+  }, 1000);
+
+  const getMinAmount = async (coin1 = fromCoin, coin2 = toCoin) => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    abortControllerRef.current = new AbortController();
+
+    try {
+      const response = await axios.get(
+        `https://api.simpleswap.io/get_ranges?api_key=${api_key}&fixed=true&currency_from=${coin1.symbol}&currency_to=${coin2.symbol}`,
+        { signal: abortControllerRef.current.signal }
+      );
+      setMinAmount(response.data.min);
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        console.error('Error getting Min Amount:', error);
+      }
+      setMinAmount(0);
     }
   };
-
-  const getMinAmount = async (coin1=fromCoin, coin2=toCoin) => {
-    try {
-        const rate = await axios.get(`https://api.simpleswap.io/get_ranges?api_key=${api_key}&fixed=true&currency_from=${coin1.symbol}&currency_to=${coin2.symbol}`);
-        setMinAmount(rate.data.min);
-        console.log("1: ", rate.data.min);
-    } catch (error) {
-        setMinAmount(0);
-        console.error('Error gettting Min Amount:', error);
-    }
-  }
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
     if (inputValue === '' || inputValue === '.' || /^-?\d*\.?\d*$/.test(inputValue)) {
       setFromCoinAmount(inputValue);
-      if(parseFloat(inputValue) < parseFloat(minAmount)){
+      if (parseFloat(inputValue) < parseFloat(minAmount)) {
         setToCoinAmount('Swap size too small');
-      }else if (inputValue !== '' && inputValue !== '.' && !isNaN(parseFloat(inputValue))) {
+      } else if (inputValue !== '' && inputValue !== '.' && !isNaN(parseFloat(inputValue))) {
+        setIsLoading(true);
         getEstimateAmount(inputValue);
       } else {
         setToCoinAmount('0');
@@ -191,9 +226,9 @@ const MainForm = (props) => {
     let tempCoin = fromCoin;
     setFromCoin(toCoin);
     setToCoin(tempCoin);
-    getMinAmount()
+    getMinAmount();
     getEstimateAmount(fromCoinAmount);
-  }
+  };
 
   const handleSearch = (e, setSearchValue, setShowDropdown) => {
     let tempCoins = tempCoinList.map((item) => ({

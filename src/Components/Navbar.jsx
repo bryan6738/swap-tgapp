@@ -50,7 +50,7 @@ const Navbar = ({ backgroundColor }) => {
       </div>
       <div className="relative px-4 py-6" style={{ backgroundColor: backgroundColor || 'transparent' }}>
         <div className="flex w-full justify-between items-center h-full">
-          <div className="absolute left-4 top-10">
+          <div className="absolute left-8" style={{top: '24px'}}>
             <LanguageSwitcher />
           </div>
           <div className="flex-grow flex items-center justify-center">
@@ -59,8 +59,8 @@ const Navbar = ({ backgroundColor }) => {
               <span>TeleSwap</span>
             </Link>
           </div>
-          <div className="absolute cursor-pointer right-10" onClick={toggleSidebar}>
-            <FaBars color="white" size={50} />
+          <div className="absolute cursor-pointer right-8" onClick={toggleSidebar} style={{top: '24px'}}>
+            <FaBars color="white" size={48} />
           </div>
         </div>
       </div>

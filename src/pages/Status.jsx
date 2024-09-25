@@ -216,7 +216,7 @@ const Status = () => {
         {status && (
           <div>
             <Exchange_id props={status.id} />
-            <Deposit props={status} />
+            <Deposit status = {status} />
             <div className="my-6 p-5 bg-white rounded-xl shadow-lg">
               <div className="flex flex-col bg-white">
                 <div>
