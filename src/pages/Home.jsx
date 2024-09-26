@@ -85,7 +85,7 @@ const Home = ({ props }) => {
             {cards.map((card, index) => (
               <div key={index} className="relative">
                 {(card.id === 0 || card.id === 3) && (
-                  <img src={CardShadow} alt="Card Shadow" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400%] h-[400%]"/>
+                  <img src={CardShadow} alt="Card Shadow" style={{maxWidth: "130%"}} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400%] h-[400%]"/>
                 )}
                 <div className="relative z-10">
                   <Card2 {...card} />

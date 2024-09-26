@@ -1,4 +1,5 @@
 import logo from "../assets/TeleSwapLogo.svg";
+import BackArrow from "../assets/back-arrow.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -6,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from 'react-i18next';
 
-const Navbar = ({ backgroundColor }) => {
+const Navbar = ({ backgroundColor, lang=true }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
@@ -51,12 +52,16 @@ const Navbar = ({ backgroundColor }) => {
       <div className="relative px-4 py-6" style={{ backgroundColor: backgroundColor || 'transparent' }}>
         <div className="flex w-full justify-between items-center h-full">
           <div className="absolute left-8" style={{top: '24px'}}>
-            <LanguageSwitcher />
+            {lang 
+              ? <LanguageSwitcher />
+              : <Link to="/">
+                <img src={BackArrow} alt="Back Arrow" style={{width: "52px"}}/>
+              </Link>}
           </div>
           <div className="flex-grow flex items-center justify-center">
             <Link to="/" className="flex flex-col items-center text-xl font- text-white">
-              <img src={logo} alt="TeleSwap Logo" className="w-12 mb-1" />
-              <span>TeleSwap</span>
+              <img src={logo} alt="TeleSwap Logo" className="w-14 mb-1" />
+              <span style={{fontSize: 'lager', fontWeight: "600"}}>TeleSwap</span>
             </Link>
           </div>
           <div className="absolute cursor-pointer right-8" onClick={toggleSidebar} style={{top: '24px'}}>

@@ -21,7 +21,6 @@ const Status = () => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [hash, setHash] = useState();
   window?.Telegram.WebApp?.ready();
 
   const copyToClipboard = () => {
@@ -75,9 +74,6 @@ const Status = () => {
             currentStatus.currency_to
           ].tx_explorer.replace("{}", currentStatus.tx_to)
         : null;
-      if (HashReceived) {
-        setHash(HashReceived);
-      }
       const bodyContext = {
         ExchangeID: currentStatus.id,
         UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
@@ -173,6 +169,11 @@ const Status = () => {
         currentStatus.status === "finished" ||
         currentStatus.status === "confirmed"
       ) {
+        const hash = currentStatus.tx_to
+          ? currentStatus.currencies[
+              currentStatus.currency_to
+            ].tx_explorer.replace("{}", currentStatus.tx_to)
+          : null;
         sendMessage(
           `${t("Your swap from")} ${currentStatus.currency_from.toUpperCase()} ${t("to")} ${currentStatus.currency_to.toUpperCase()}${t(" has been completed! Thank You for using TeleSwap.\n\nHere is your transaction hash: ")} ${hash}`,  
         );
