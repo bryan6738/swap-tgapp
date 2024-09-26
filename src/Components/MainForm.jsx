@@ -6,7 +6,7 @@ import axios from 'axios';
 import './MainForm.css'; 
 
 const popularCoins = ['ton', 'sol', 'eth', 'trx', 'bnb', 'btc', 'usdc', 'xrp', 'doge', 'ada',
-  'shib', 'avax', 'usdt', 'dot', 'bch', 'near', 'link', 'matic', 'ltc', 'icp'];
+  'shib', 'avax', 'usdterc20', 'usdtbep20', 'usdttrc20', 'usdtspl', 'usdtton', 'dot', 'bch', 'near', 'link', 'matic', 'ltc', 'icp'];
 
 const MainCard = ({ children }) => (
   <div className="main-card">{children}</div>
@@ -80,7 +80,7 @@ const CoinDropdown = ({ show, searchValue, handleSearch, tempCoinList, handleCoi
         />
         <div className="coin-list">
           {tempCoinList.map((item, key) => (
-            item.visible && (
+            item.visible && item.coin && (
               <div
                 key={key}
                 onClick={() => handleCoinSelect(item.coin)}
@@ -117,7 +117,7 @@ const MainForm = (props) => {
   const [minAmount, setMinAmount] = useState(0);
   const { t } = useTranslation();
 
-  const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
+  const api_key = import.meta.env.VITE_API_KEY;
   const abortControllerRef = useRef(null);
 
   useEffect(() => {
@@ -318,8 +318,8 @@ const MainForm = (props) => {
           </div>
           <SecondaryCard>
             <div className="coin-selector" onClick={() => setShowDropdown2(!showDropdown2)}>
-              <img src={toCoin.image} alt={toCoin.symbol} className="coin-image" />
-              <span>{toCoin.symbol.toUpperCase().slice(0, 4)}</span>
+              <img src={toCoin?.image} alt={toCoin?.symbol} className="coin-image" />
+              <span>{toCoin?.symbol.toUpperCase().slice(0, 4)}</span>
               <ChevronIcon />
             </div>
           </SecondaryCard>

@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export const sendMessage = async (message) => {
-    const token = '7242858872:AAHxAF1Q_u_OVibYTwn1xyDpaZW5SHEPdtU'; //online -> Gabriel
-    // const token = '7055164318:AAHsc1jf6JK4GXXlqfmrmJRuAnmj94WDi0I';  //local -> erwin
+    const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
     let chatId = null;
 
     try {

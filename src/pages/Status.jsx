@@ -12,7 +12,7 @@ import "./LoadingSpinner.css";
 import transitionFade from "../assets/transitionfade.svg";
 import { sendMessage } from "../Components/SendMessage";
 
-const api_key = "707e91ed-2523-4447-9996-09713cc0f1f1";
+const api_key = import.meta.env.VITE_API_KEY;
 let previousStatus = null;
 
 const Status = () => {
@@ -21,6 +21,7 @@ const Status = () => {
   const { t } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hash, setHash] = useState();
   window?.Telegram.WebApp?.ready();
 
   const copyToClipboard = () => {
@@ -74,6 +75,9 @@ const Status = () => {
             currentStatus.currency_to
           ].tx_explorer.replace("{}", currentStatus.tx_to)
         : null;
+      if (HashReceived) {
+        setHash(HashReceived);
+      }
       const bodyContext = {
         ExchangeID: currentStatus.id,
         UserID: window.Telegram.WebApp.initDataUnsafe?.user?.id,
@@ -146,7 +150,6 @@ const Status = () => {
 
   const handleStatusUpdate = (currentStatus) => {
     if (previousStatus !== currentStatus.status) {
-      console.log("status: ", currentStatus.status);
       if (currentStatus.status === "waiting") {
         sendMessage(
           `${t("Exchange Started, waiting on")} ${currentStatus.currency_from.toUpperCase()}${t(" to be deposited! Your exchange ID is")} ${currentStatus.id}`,
@@ -171,7 +174,7 @@ const Status = () => {
         currentStatus.status === "confirmed"
       ) {
         sendMessage(
-          `${t("Your swap from")} ${currentStatus.currency_from.toUpperCase()} ${t("to")} ${currentStatus.currency_to.toUpperCase()}${t(" has been completed! Thank You for using TeleSwap.")}`,
+          `${t("Your swap from")} ${currentStatus.currency_from.toUpperCase()} ${t("to")} ${currentStatus.currency_to.toUpperCase()}${t(" has been completed! Thank You for using TeleSwap.\n\nHere is your transaction hash: ")} ${hash}`,  
         );
         ExchangeLogger(currentStatus);
       }

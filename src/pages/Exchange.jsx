@@ -11,7 +11,7 @@ import './LoadingSpinner.css';
 import PrivacyPolicy from "./PrivacyPolicy.jsx";
 import TermsOfService from "./TermsOfService.jsx";
 
-const api_key = '707e91ed-2523-4447-9996-09713cc0f1f1';
+const api_key = import.meta.env.VITE_API_KEY;
 const summaryStyle = {
   outline: 'none',
   cursor: 'pointer',
