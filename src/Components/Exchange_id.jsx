@@ -25,7 +25,7 @@ const Exchange_id = ({ props }) => {
           <div className='mx-4'>
             <p className='text-[11px] font-medium text-black'>{t("Exchange ID:")} {exchangeId}</p>
           </div>
-          <div className='mx-4 relative'>
+          <div className='mx-4 relative flex justify-end'>
             <button
               onClick={copyToClipboard}
               className='bg-blue-400 text-white p-2 rounded-lg hover:bg-blue-500 transition-colors duration-200'
@@ -34,7 +34,7 @@ const Exchange_id = ({ props }) => {
               <IoCopyOutline />
             </button>
             {copied && (
-              <div className="absolute text-sm -mt-12 right-0 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out">
+              <div className="absolute text-sm -mt-12 right-0 top-4 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out" style={{width: '160px'}}>
                 {t("Copied to clipboard")}
               </div>
             )}

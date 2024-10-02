@@ -136,7 +136,7 @@ const MainForm = (props) => {
           response.data.find((coin) => coin.symbol === item)
         );
         const allCoinList = response.data.filter(
-          (item) => !popularCoins.includes(item.symbol)
+          (item) => (!popularCoins.includes(item.symbol) && !item.isFiat)
         );
         const coinList = [...popularCoinList, ...allCoinList];
         const tempList = coinList.map((item) => ({ coin: item, visible: true }));

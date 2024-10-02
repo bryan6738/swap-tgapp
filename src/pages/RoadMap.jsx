@@ -89,7 +89,7 @@ const TeleSwapRoadmap = () => {
                 <div className="w-4 h-4 rounded-full bg-blue-500 mr-2" />
                 {t("Earn By Holding")}
               </h3>
-              <p className="text-sm text-gray-300">{t("Token Holders earn 50% of platform revenue. Get rewarded for holding the TeleSwap token. Rewards are automatically distributed to Token Holders when the profit threshhold is met. Must hold .1% to be elidgle for rewards.")}</p>
+              <p className="text-sm text-gray-300">{t("Token Holders earn 50% of platform revenue. Get rewarded for holding the TeleSwap token. Rewards are automatically distributed to Token Holders when the profit threshhold is met. Must hold .1% to be eligible for rewards.")}</p>
             </div>
             <div>
               <h3 className="font-semibold flex items-center">
