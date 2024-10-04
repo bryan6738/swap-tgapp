@@ -6,7 +6,7 @@ import { IoCopyOutline } from "react-icons/io5";
 import Navbar from "../Components/Navbar";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import "./LoadingSpinner.css";
 import transitionFade from "../assets/transitionfade.svg";
@@ -152,7 +152,9 @@ const Status = () => {
         );
         ExchangeLogger(currentStatus);
       } else if (currentStatus.status === "confirming") {
-        sendMessage(`${t("space_received")}${currentStatus.currency_from.toUpperCase()}${t(" Received!")}`);
+        sendMessage(
+          `${t("space_received")}${currentStatus.currency_from.toUpperCase()}${t(" Received!")}`,
+        );
         ExchangeLogger(currentStatus);
         processingStatus(currentStatus);
       } else if (currentStatus.status === "exchanging") {
@@ -175,7 +177,7 @@ const Status = () => {
             ].tx_explorer.replace("{}", currentStatus.tx_to)
           : null;
         sendMessage(
-          `${t("Your swap from")} ${currentStatus.currency_from.toUpperCase()} ${t("to")} ${currentStatus.currency_to.toUpperCase()}${t(" has been completed! Thank You for using TeleSwap.\n\nHere is your transaction hash: ")} ${hash}`,  
+          `${t("Your swap from")} ${currentStatus.currency_from.toUpperCase()} ${t("to")} ${currentStatus.currency_to.toUpperCase()}${t(" has been completed! Thank You for using TeleSwap.\n\nHere is your transaction hash: ")} ${hash}`,
         );
         ExchangeLogger(currentStatus);
       }
@@ -220,11 +222,13 @@ const Status = () => {
         {status && (
           <div>
             <Exchange_id props={status.id} />
-            <Deposit status = {status} />
+            <Deposit status={status} />
             <div className="my-6 p-5 bg-white rounded-xl shadow-lg">
               <div className="flex flex-col bg-white">
                 <div>
-                  <h1 className="font-semibold bg-white p-2">{t("Swap details")}</h1>
+                  <h1 className="font-semibold bg-white p-2">
+                    {t("Swap details")}
+                  </h1>
                 </div>
                 <div className="p-3">
                   <p className="text-xs font-[500] text-black/60 pb-4">

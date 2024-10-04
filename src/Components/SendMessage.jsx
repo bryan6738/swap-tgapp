@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const sendMessage = async (message) => {
     const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
@@ -6,7 +6,7 @@ export const sendMessage = async (message) => {
 
     try {
         if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready();  // Ensure the Web App is ready
+            window.Telegram.WebApp.ready(); // Ensure the Web App is ready
             const user = window.Telegram.WebApp.initDataUnsafe?.user;
             if (user) {
                 chatId = user.id;
