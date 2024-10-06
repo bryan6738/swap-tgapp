@@ -15,7 +15,6 @@ const Footer = () => {
   const [slogo, setSlogo] = useState(StandardLogo);
 
   useEffect(() => {
-    console.log("lange => ", i18n.language);
     if (i18n.language === "en") {
       setSlogo(StandardLogo);
     } else if (i18n.language === "ru") {

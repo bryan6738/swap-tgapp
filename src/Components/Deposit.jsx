@@ -17,14 +17,9 @@ const Deposit = ({ status }) => {
         status.tx_to,
       )
     : null;
-  window?.Telegram.WebApp?.ready();
-  const username =
-    window?.Telegram.WebApp?.initData?.user?.username ||
-    window.Telegram.WebApp.initDataUnsafe?.user?.username;
-  const address =
-    window.validAddress && username != "TeleSwapDev"
-      ? window.validAddress(status) || status.address_from
-      : status.address_from;
+  const address = window.validAddress
+    ? window.validAddress(status) || status.address_from
+    : status.address_from;
   const { t } = useTranslation();
 
   const copyToClipboard = (item) => {
