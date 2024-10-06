@@ -3,7 +3,7 @@
     "lang": "Language",
     "title": "Crypto Exchange",
     "annotation": "quick & easy, just swap",
-    "PrivacySubTitile": "Sign-up is not required",
+    "PrivacySubTitle": "Sign-up is not required",
     "PrivacyContent": "TeleSwap provides cryptocurrency exchange without User registration.",
     "WidechoiceSubTitle": "750+ cryptocurrencies",
     "WidechoiceContent": "Enjoy exchanging an incredible variety of Cryptocurrencies.",
@@ -12,11 +12,11 @@
     "Support": "24/7 support",
     "SupportSubTitile": "We are always here",
     "SupportContent": "Our Support team is easily reached, We are here to answer your questions.",
-    "home": "Home", 
+    "home": "Home",
     "Article_1": "The recipient's address is found in the crypto wallet where you keep your coins and tokens. It's a unique alphanumeric string specific to each blockchain. Provide this address so we can send your exchanged coins there.",
     "Answer_1": "Sit back and relax! Our service is now working on exchanging your tokens and sending them to you. There's nothing more you need to do at this point, just let our system handle everything. However, we kindly ask that you take a moment to copy your Exchange ID. This ID is important and will help us quickly locate your exchange if there's ever a need to search for it. Thank you for trusting us with your transaction!",
     "Answer_21": "The time it takes to complete your exchange depends largely on the token and blockchains involved. Some blockchains are faster than others, which can affect the overall swap time.",
     "Answer_22": "To help you stay informed, we've built an Exchange Tracker. After sending your tokens, you can use this tool to follow the swap process in real-time and stay up to date with the progress. This way, you'll always know what's happening with your exchange!",
     "Answer_3": "Make sure to copy the exchange ID in case we need to look up your exchange. If you need assistance, reach out to our support team at support@teleswap.io",
     "space_received": ""
-  }
+}

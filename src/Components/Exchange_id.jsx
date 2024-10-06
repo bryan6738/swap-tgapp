@@ -1,6 +1,6 @@
 import { IoCopyOutline } from "react-icons/io5";
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Exchange_id = ({ props }) => {
   const exchangeId = props;
@@ -8,33 +8,39 @@ const Exchange_id = ({ props }) => {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(exchangeId)
+    navigator.clipboard
+      .writeText(exchangeId)
       .then(() => {
         setCopied(true);
         setTimeout(() => {
           setCopied(false);
         }, 600);
       })
-      .catch((error) => console.error('Error copying to clipboard:', error));
+      .catch((error) => console.error("Error copying to clipboard:", error));
   };
 
   return (
     <>
-      <div className='mb-5 mt-11'>
-        <div className='border border-gray-300 mx-3 text-center rounded-2xl py-2 flex justify-between items-center'>
-          <div className='mx-4'>
-            <p className='text-[11px] font-medium text-black'>{t("Exchange ID:")} {exchangeId}</p>
+      <div className="mb-5 mt-11">
+        <div className="border border-gray-300 mx-3 text-center rounded-2xl py-2 flex justify-between items-center">
+          <div className="mx-4">
+            <p className="text-[11px] font-medium text-black">
+              {t("Exchange ID:")} {exchangeId}
+            </p>
           </div>
-          <div className='mx-4 relative'>
+          <div className="mx-4 relative flex justify-end">
             <button
               onClick={copyToClipboard}
-              className='bg-blue-400 text-white p-2 rounded-lg hover:bg-blue-500 transition-colors duration-200'
-              title='Copy to clipboard'
+              className="bg-blue-400 text-white p-2 rounded-lg hover:bg-blue-500 transition-colors duration-200"
+              title="Copy to clipboard"
             >
               <IoCopyOutline />
             </button>
             {copied && (
-              <div className="absolute text-sm -mt-12 right-0 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out">
+              <div
+                className="absolute text-sm -mt-12 right-0 top-4 bg-green-500 text-white text-center py-2 px-4 rounded-md shadow-md opacity-100 transition-opacity duration-500 ease-in-out"
+                style={{ width: "160px" }}
+              >
                 {t("Copied to clipboard")}
               </div>
             )}
@@ -42,7 +48,7 @@ const Exchange_id = ({ props }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Exchange_id
+export default Exchange_id;
