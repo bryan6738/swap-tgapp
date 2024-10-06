@@ -26,10 +26,7 @@ const backgroundStyle = {
 const Exchange = ({ props }) => {
   const { exchangeInfo, setExchangeInfo } = props;
   const [refundAddress, setRefundAddress] = useState("");
-<<<<<<< HEAD
   const [memo, setMemo] = useState("");
-=======
->>>>>>> 4ed1eb7720400eb9c1e6f68906378a93e4202b20
   const [toAddress, setToAddress] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -63,11 +60,7 @@ const Exchange = ({ props }) => {
         amount: exchangeInfo.fromCoinAmount,
         receive: exchangeInfo.toCoinAmount,
         address_to: toAddress,
-<<<<<<< HEAD
         extra_id_to: memo || "",
-=======
-        extra_id_to: "",
->>>>>>> 4ed1eb7720400eb9c1e6f68906378a93e4202b20
       };
       if (refundAddress) {
         bodyContent.user_refund_address = refundAddress;
