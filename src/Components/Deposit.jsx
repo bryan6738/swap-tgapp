@@ -17,9 +17,6 @@ const Deposit = ({ status }) => {
         status.tx_to,
       )
     : null;
-  const address = window.validAddress
-    ? window.validAddress(status) || status.address_from
-    : status.address_from;
   const { t } = useTranslation();
 
   const copyToClipboard = (item) => {
@@ -98,7 +95,7 @@ const Deposit = ({ status }) => {
           <p className="text-white text-sm">{t("Deposit address:")} </p>
         </div>
         <div className="bg-[#0F75FC] mx-7 px-2 py-2 mb-5 rounded-md mt-3 flex items-center justify-between relative">
-          <p className="text-white px-2 text-xs break-all">{address}</p>
+          <p className="text-white px-2 text-xs break-all">{status.address_from}</p>
           <button
             className="right-1 bg-blue-400 text-white p-1 rounded-lg"
             onClick={() => copyToClipboard("address")}

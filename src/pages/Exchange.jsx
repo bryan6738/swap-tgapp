@@ -67,7 +67,7 @@ const Exchange = ({ props }) => {
       }
 
       await new Promise((resolve) => setTimeout(resolve, 500));
-      const res = await axios.post(url, window.jsonFormat(bodyContent));
+      const res = await axios.post(url, bodyContent);
       setIsLoading(false);
       if (res.status === 200) {
         navigateTo(`/status/${res.data.id}`);
