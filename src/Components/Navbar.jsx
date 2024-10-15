@@ -33,7 +33,7 @@ const Navbar = ({ backgroundColor, lang = true }) => {
         <ul>
           <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <Link
-              to={"/"}
+              to={"/swap-tgapp/"}
               className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
             >
               {t("home")}
@@ -41,7 +41,7 @@ const Navbar = ({ backgroundColor, lang = true }) => {
           </li>
           <li className="px-5 py-4 w-full hover:bg-gray-800 hover:bg-opacity-75">
             <Link
-              to={"/roadmap"}
+              to={"/swap-tgapp/roadmap"}
               className="text-md text-[#FCFCFC] block font-semibold hover:text-gray-200"
             >
               {t("roadmap")}
@@ -58,7 +58,7 @@ const Navbar = ({ backgroundColor, lang = true }) => {
             {lang ? (
               <LanguageSwitcher />
             ) : (
-              <Link to="/">
+              <Link to="/swap-tgapp/">
                 <img
                   src={BackArrow}
                   alt="Back Arrow"
@@ -69,7 +69,7 @@ const Navbar = ({ backgroundColor, lang = true }) => {
           </div>
           <div className="flex-grow flex items-center justify-center">
             <Link
-              to="/"
+              to="/swap-tgapp/"
               className="flex flex-col items-center text-xl font- text-white"
             >
               <img src={logo} alt="TeleSwap Logo" className="w-14 mb-1" />

@@ -78,7 +78,7 @@ const SwapButton = ({ onClick }) => (
 const ExchangeButton = () => {
   const { t } = useTranslation();
   return (
-    <Link to="/exchange" className="exchange-button">
+    <Link to="/swap-tgapp/exchange" className="exchange-button">
       <button className="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-opacity-50">
         {t("Exchange")}
       </button>

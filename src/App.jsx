@@ -40,15 +40,15 @@ function App() {
   return (
     <Routes>
       <Route
-        path='/'
+        path='/swap-tgapp/'
         element={<Home props={{ exchangeInfo, setExchangeInfo }} />}
       />
       <Route
-        path='/exchange'
+        path='/swap-tgapp/exchange'
         element={<Exchange props={{ exchangeInfo, setExchangeInfo }} />}
       />
-      <Route path='/status/:id' element={<Status />} />
-      <Route path='/roadmap' element={<RoadMap />} />
+      <Route path='/swap-tgapp/status/:id' element={<Status />} />
+      <Route path='/swap-tgapp/roadmap' element={<RoadMap />} />
     </Routes>
   );
 }
